@@ -13,3 +13,22 @@ set(CMAKE_CXX_EXTENSIONS       OFF)
 set(STAR_FIGHTER_GAME_TARGET_NAME StarFighterGame) 
 
 add_subdirectory(StarFighter)
+
+# Fetch SFML
+include(FetchContent)
+# variable
+set(SFML_LIB_NAME SFML)
+
+FetchContent_Declare(
+	${SFML_LIB_NAME}
+	GIT_REPOSITORY https://github.com/SFML/SFML
+	GIT_TAG 2.5.1
+	GIT_SHALLOW FALSE
+)
+
+FetchContent_MakeAvailable(${SFML_LIB_NAME})
+
+target_link_libraries(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC sfml-graphics)
+target_link_libraries(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC sfml-window)
+target_link_libraries(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC sfml-system)
+target_link_libraries(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC sfml-audio)
