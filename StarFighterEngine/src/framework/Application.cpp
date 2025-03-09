@@ -1,13 +1,14 @@
-#include <iostream>
 #include "framework/Application.h"
 #include "framework/Core.h"
+#include "framework/World.h"
 
 namespace st
 {
 	Application::Application()
 		: mWindow{ sf::VideoMode(1024, 1024), "Star Fighter.Project \"Armada\"" },
-		mTargetFrameRate{ 30.f },
-		mTickClock{}
+		mTargetFrameRate{ 60.f },
+		mTickClock{},
+		currentWorld{ nullptr }
 	{
 
 	}
@@ -35,14 +36,16 @@ namespace st
 				TickInternal(targetDeltaTime);
 				RenderInternal();
 			}
-
-			LOG("ticking at framerate: %f",  1.f / frameDeltaTime);
 		}
 	}
-
 	void Application::TickInternal(float deltaTime)
 	{
 		Tick(deltaTime);
+
+		if (currentWorld)
+		{
+			currentWorld->TickInternal(deltaTime);
+		}
 	}
 
 	void Application::RenderInternal()
@@ -56,9 +59,9 @@ namespace st
 
 	void Application::Render()
 	{
-		sf::RectangleShape rect{ sf::Vector2f(100.f, 100.f) };
-		rect.setFillColor(sf::Color::Red);
-		rect.setOrigin(100, 100);
+		sf::CircleShape rect{ 50 };
+		rect.setFillColor(sf::Color::Green);
+		rect.setOrigin(50, 50);
 		rect.setPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f);
 
 		mWindow.draw(rect);
@@ -66,5 +69,6 @@ namespace st
 
 	void Application::Tick(float deltaTime)
 	{
+
 	}
 }

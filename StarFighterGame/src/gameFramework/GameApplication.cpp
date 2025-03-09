@@ -1,11 +1,15 @@
 #include "gameFramework/GameApplication.h"
+#include "framework/World.h"
 
 st::Application* GetApplication()
 {
-    return new st::GameApplication{};
+	return new st::GameApplication{};
 }
 
-namespace ly
+namespace st
 {
-
+	GameApplication::GameApplication()
+	{
+		LoadWorld<World>();
+	}
 }

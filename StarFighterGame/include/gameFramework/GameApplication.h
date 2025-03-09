@@ -3,8 +3,9 @@
 
 namespace st
 {
-    class GameApplication : public Application
-    {
-
-    };
+	class GameApplication : public Application
+	{
+	public:
+		GameApplication();
+	};
 }
