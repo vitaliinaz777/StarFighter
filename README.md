@@ -1,5 +1,5 @@
 # Дипломная работа
-### Star Fighter. Project Armada
+### Star Fighter. Project "Armada"
 Финальный проект курса OTUS C++ 2024
 
 **Описание проекта:**
