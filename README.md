@@ -1,11 +1,9 @@
-Star Fighter. Project Armada
-[Final project for C++ course on OTUS. "OTUS C++ 2024"]
-
 # Проектная работа
+### Star Fighter. Project Armada
+Final project for C++ course on OTUS."OTUS C++ 2024
 
 **Описание проекта:**
 Игра в жанре Space Invaders.
-
 
 **Правила игры:**
 - Убивать противников (зарабатывая при этом очки) 
@@ -17,7 +15,7 @@ Star Fighter. Project Armada
 
 **Элементы приложения:**
 - Космический корабль
-- Враги
+- Враг
 - Босс
 - Жизнь/Урон
 - Оружие (3 вида)
