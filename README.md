@@ -1,6 +1,6 @@
-# Проектная работа
+# Дипломная работа
 ### Star Fighter. Project Armada
-Final project for C++ course on OTUS."OTUS C++ 2024
+Финальный проект курса OTUS C++ 2024
 
 **Описание проекта:**
 Игра в жанре Space Invaders.
