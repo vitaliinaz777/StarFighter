@@ -23,7 +23,9 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(${SFML_LIB_NAME})
 
-# variable
-set(STAR_FIGHTER_GAME_TARGET_NAME StarFighterGame) 
+# variables
+set(STAR_FIGHTER_ENGINE_TARGET_NAME StarFighterEngine)
+set(STAR_FIGHTER_GAME_TARGET_NAME StarFighterGame)
 
-add_subdirectory(StarFighter)
+add_subdirectory(StarFighterEngine)
+add_subdirectory(StarFighterGame)

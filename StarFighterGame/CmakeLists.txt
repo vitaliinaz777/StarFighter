@@ -1,0 +1,24 @@
+add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
+	${CMAKE_CURRENT_SOURCE_DIR}/include/gameFramework/GameApplication.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
+
+)
+
+target_include_directories(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC 
+ 	${CMAKE_CURRENT_SOURCE_DIR}/include
+ )
+
+target_link_libraries(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC ${STAR_FIGHTER_ENGINE_TARGET_NAME})
+
+# Function name is CopyLibDirToTarget. Parameters names of function are LIB_NAME and TARGET_NAME
+function(CopyLibDirToTarget LIB_NAME TARGET_NAME)
+	add_custom_command(TARGET ${TARGET_NAME}
+	POST_BUILD
+	COMMAND
+	${CMAKE_COMMAND} -E copy_directory
+	$<TARGET_FILE_DIR:${LIB_NAME}>
+	$<TARGET_FILE_DIR:${TARGET_NAME}>
+	)
+endfunction()
+
+CopyLibDirToTarget(${STAR_FIGHTER_ENGINE_TARGET_NAME} ${STAR_FIGHTER_GAME_TARGET_NAME})
