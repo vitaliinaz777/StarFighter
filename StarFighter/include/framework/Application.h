@@ -1,4 +1,5 @@
 #pragma once
+#pragma once
 #include <SFML/Graphics.hpp>
 
 namespace st
@@ -9,8 +10,12 @@ namespace st
 		Application();
 		void Run();
 	private:
-		void Tick(float deltaTime);
-		void Render();
+		void TickInternal(float deltaTime);
+		void RenderInternal();
+
+		virtual void Render();
+		virtual void Tick(float deltaTime);
+
 		sf::RenderWindow mWindow;
 		float mTargetFrameRate;
 		sf::Clock mTickClock;

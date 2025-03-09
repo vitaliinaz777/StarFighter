@@ -1,15 +1,18 @@
 #include <iostream>
 #include "framework/Application.h"
+
 namespace st
 {
 	Application::Application()
-		: mWindow{ sf::VideoMode(1024, 1024), "Star Fighter. Project \"Armada\"" },
-		mTargetFrameRate{ 60.f },
+		: mWindow{ sf::VideoMode(1024, 1024), "Star Fighter.Project \"Armada\"" },
+		mTargetFrameRate{ 30.f },
 		mTickClock{}
 	{
+
 	}
 
-	void Application::Run(){
+	void Application::Run()
+	{
 		mTickClock.restart();
 		float accumulatedTime = 0.f;
 		float targetDeltaTime = 1.f / mTargetFrameRate;
@@ -28,17 +31,38 @@ namespace st
 			while (accumulatedTime > targetDeltaTime)
 			{
 				accumulatedTime -= targetDeltaTime;
-				Tick(targetDeltaTime);
-				Render();
+				TickInternal(targetDeltaTime);
+				RenderInternal();
 			}
 			std::cout << "ticking at framerate: " << 1.f / frameDeltaTime << std::endl;
 		}
 	}
-	void Application::Tick(float deltaTime)
+
+	void Application::TickInternal(float deltaTime)
 	{
+		Tick(deltaTime);
+	}
+
+	void Application::RenderInternal()
+	{
+		mWindow.clear();
+
+		Render();
+
+		mWindow.display();
 	}
 
 	void Application::Render()
+	{
+		sf::RectangleShape rect{ sf::Vector2f(100.f, 100.f) };
+		rect.setFillColor(sf::Color::Red);
+		rect.setOrigin(100, 100);
+		rect.setPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f);
+
+		mWindow.draw(rect);
+	}
+
+	void Application::Tick(float deltaTime)
 	{
 	}
 }
