@@ -13,7 +13,7 @@ namespace st
 
     Actor::~Actor()
     {
-
+        LOG("Actor destoryed");
     }
     void Actor::BeginPlayInternal()
     {
