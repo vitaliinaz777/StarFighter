@@ -1,5 +1,6 @@
 #include "gameFramework/GameApplication.h"
 #include "framework/World.h"
+#include "framework/Actor.h"
 
 st::Application* GetApplication()
 {
@@ -10,6 +11,10 @@ namespace st
 {
 	GameApplication::GameApplication()
 	{
-		LoadWorld<World>();
+		weak<World> testWorld = LoadWorld<World>();
+		testWorld.lock()->SpawnActor<Actor>();
+		testWorld.lock()->SpawnActor<Actor>();
+		testWorld.lock()->SpawnActor<Actor>();
+
 	}
 }
