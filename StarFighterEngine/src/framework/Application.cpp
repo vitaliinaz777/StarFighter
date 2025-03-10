@@ -1,3 +1,4 @@
+#include "framework/AssetManager.h"
 #include "framework/Application.h"
 #include "framework/Core.h"
 #include "framework/World.h"
@@ -9,7 +10,9 @@ namespace st
 		: mWindow{ sf::VideoMode(windowWidth, windowHeight),  title, style },
 		mTargetFrameRate{ 60.f },
 		mTickClock{},
-		currentWorld{ nullptr }
+		currentWorld{ nullptr },
+		mCleanCycleClock{},
+		mCleanCycleIterval{ 2.f }
 	{
 
 	}
@@ -46,6 +49,12 @@ namespace st
 		if (currentWorld)
 		{
 			currentWorld->TickInternal(deltaTime);
+		}
+
+		if (mCleanCycleClock.getElapsedTime().asSeconds() >= mCleanCycleIterval)
+		{
+			mCleanCycleClock.restart();
+			AssetManager::Get().CleanCycle();
 		}
 	}
 

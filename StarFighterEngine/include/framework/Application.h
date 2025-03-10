@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "framework/Core.h"
+
 namespace st
 {
 	class World;
@@ -25,6 +26,8 @@ namespace st
 		sf::Clock mTickClock;
 
 		shared<World> currentWorld;
+		sf::Clock mCleanCycleClock;
+		float mCleanCycleIterval;
 	};
 
 	template<typename WorldType>
