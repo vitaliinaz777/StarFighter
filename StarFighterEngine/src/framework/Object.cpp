@@ -1,20 +1,17 @@
 #include "framework/Object.h"
 #include "framework/Core.h"
 
-namespace st
-{
+namespace st {
     Object::Object()
-        : mIsPendingDestory{ false }
+        : mIsPendingDestroy{ false }
     {
     }
-
     Object::~Object()
     {
-        LOG("Object Destoryed");
+        LOG("Object destroyed");
     }
-
-    void Object::Destory()
+    void Object::Destroy()
     {
-        mIsPendingDestory = true;
+        mIsPendingDestroy = true;
     }
 }

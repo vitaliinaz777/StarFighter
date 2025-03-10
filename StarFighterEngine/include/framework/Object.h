@@ -1,17 +1,16 @@
 #pragma once
 
-namespace st
-{
-    class Object
-    {
+namespace st {
+    // Base class for all objects in the game
+    class Object {
     public:
         Object();
         virtual ~Object();
 
-        void Destory();
-        bool IsPendingDestory() const { return mIsPendingDestory; }
+        void Destroy();
+        bool IsPendingDestroy() const { return mIsPendingDestroy; }
 
     private:
-        bool mIsPendingDestory;
+        bool mIsPendingDestroy;
     };
 }

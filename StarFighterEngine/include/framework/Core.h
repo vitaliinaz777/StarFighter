@@ -1,11 +1,10 @@
 #pragma once
-#include <map>
-#include <memory>
 #include <stdio.h>
+#include <memory>
+#include <map>
 #include <unordered_map>
 
-namespace st
-{
+namespace st {
     template<typename T>
     using unique = std::unique_ptr<T>;
 
@@ -18,12 +17,16 @@ namespace st
     template<typename T>
     using List = std::vector<T>;
 
+    // Red-Black Tree complexity O(log n)
     template<typename keyType, typename valType, typename Pr = std::less<keyType>>
     using Map = std::map<keyType, valType, Pr>;
 
+    // Hashmap average complexity O(1)
     template<typename keyType, typename valType, typename hasher = std::hash<keyType>>
     using Dictionary = std::unordered_map<keyType, valType, hasher>;
 
-    //a macro
-    #define LOG(M, ...) printf(M "\n", ##__VA_ARGS__)
+
+    // macro for logging
+    // ... is a variadic argument
+#define LOG(M, ...) printf(M "\n", ##__VA_ARGS__)
 }
