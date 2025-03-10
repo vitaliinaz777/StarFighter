@@ -4,8 +4,9 @@
 
 namespace st
 {
-	Application::Application()
-		: mWindow{ sf::VideoMode(1024, 1024), "Star Fighter.Project \"Armada\"" },
+
+	Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style)
+		: mWindow{ sf::VideoMode(windowWidth, windowHeight),  title, style },
 		mTargetFrameRate{ 60.f },
 		mTickClock{},
 		currentWorld{ nullptr }
@@ -59,12 +60,10 @@ namespace st
 
 	void Application::Render()
 	{
-		sf::CircleShape rect{ 50 };
-		rect.setFillColor(sf::Color::Green);
-		rect.setOrigin(50, 50);
-		rect.setPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f);
-
-		mWindow.draw(rect);
+		if (currentWorld)
+		{
+			currentWorld->Render(mWindow);
+		}
 	}
 
 	void Application::Tick(float deltaTime)

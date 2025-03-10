@@ -10,24 +10,24 @@ st::Application* GetApplication()
 namespace st
 {
 	GameApplication::GameApplication()
+		: Application{ 600, 980, "Star Fighter. Project \"Armada\"" , sf::Style::Titlebar | sf::Style::Close }
 	{
-		weak<World> testWorld = LoadWorld<World>();
-		testWorld.lock()->SpawnActor<Actor>();
-		testWorld.lock()->SpawnActor<Actor>();
-		testWorld.lock()->SpawnActor<Actor>();
-        actorToDestory = testWorld.lock()->SpawnActor<Actor>();
-        counter = 0;
-    }
+		weak<World> newWorld = LoadWorld<World>();
+		newWorld.lock()->SpawnActor<Actor>();
+		actorToDestory = newWorld.lock()->SpawnActor<Actor>();
+		actorToDestory.lock()->SetTexture("P:/Projects/StarFighter/StarFighterGame/assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
+		counter = 0;
+	}
 
-    void GameApplication::Tick(float deltaTime)
-    {
-        counter += deltaTime;
-        if (counter > 2.f)
-        {
-            if (!actorToDestory.expired())
-            {
-                actorToDestory.lock()->Destory();
-            }
-        }
+	void GameApplication::Tick(float deltaTime)
+	{
+		counter += deltaTime;
+		if (counter > 2.f)
+		{
+			if (!actorToDestory.expired())
+			{
+				actorToDestory.lock()->Destory();
+			}
+		}
 	}
 }
