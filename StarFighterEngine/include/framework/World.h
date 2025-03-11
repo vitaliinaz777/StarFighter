@@ -20,8 +20,9 @@ namespace st
         virtual ~World(); // CPP program without virtual destructor 
         // causing undefined behavior.
 
-        template<typename ActorType>
-        weak<ActorType> SpawnActor();
+        // variadic tamplate parameters
+        template<typename ActorType, typename... Args>
+        weak<ActorType> SpawnActor(Args... args);
 
         sf::Vector2u GetWindowSize() const;
 
@@ -36,10 +37,11 @@ namespace st
         List<shared<Actor>> mPendingActors; // list of actors to be added to the world at the beginning of the frame tick
     };
 
-    template<typename ActorType>
-    weak<ActorType> World::SpawnActor()
+    // variadic tamplate parameters
+    template<typename ActorType, typename... Args>
+    weak<ActorType> World::SpawnActor(Args... args)
     {
-        shared<ActorType> newActor{ new ActorType{this} };
+        shared<ActorType> newActor{ new ActorType(this, args...) };
         mPendingActors.push_back(newActor);
         return newActor;
     }

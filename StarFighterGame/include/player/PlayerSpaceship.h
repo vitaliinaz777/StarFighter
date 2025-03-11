@@ -10,7 +10,7 @@ namespace st
     {
     public:
         PlayerSpaceship(World* owningWorld, const std::string& path = "SpaceShooterRedux/PNG/playerShip1_blue.png");
-        ~PlayerSpaceship(); // to resolve pimpl problem 
+        ~PlayerSpaceship(); // to resolve pimpl problem with nique<BulletShooter> mShooter
 
         virtual void Tick(float deltaTime) override;
         void SetSpeed(float newSpeed) { mSpeed = newSpeed; }

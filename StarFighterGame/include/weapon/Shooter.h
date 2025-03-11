@@ -12,7 +12,7 @@ namespace st
 
         virtual bool CanShoot() const { return true; }
         virtual bool IsOnCooldown() const { return false; }
-        const Actor* GetOwner() const { return mOwner; }
+        Actor* GetOwner() const { return mOwner; }
 
     protected:
         Shooter(Actor* owner);

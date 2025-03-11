@@ -9,11 +9,11 @@ namespace st
         : Spaceship{ owningWorld, path },
         mMoveInput{ 0.f, 0.f },
         mSpeed{ 200.f },
-        mShooter{ new BulletShooter{this, 0.3f} }
+        mShooter{ new BulletShooter{this, 0.1f} }
     {
     }
 
-    PlayerSpaceship::~PlayerSpaceship() {}; // to resolve pimpl problem
+    PlayerSpaceship::~PlayerSpaceship() {}; // to resolve pimpl problem with nique<BulletShooter> mShooter
 
     void PlayerSpaceship::Tick(float deltaTime)
     {

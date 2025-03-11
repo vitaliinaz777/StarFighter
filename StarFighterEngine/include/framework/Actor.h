@@ -36,6 +36,8 @@ namespace st
 
         sf::Vector2u GetWindowsSize() const;
 
+        World* GetWorld() const { return mOwningWorld; };
+
         // TODO: Implement scaling and other transformations
 
     private:
