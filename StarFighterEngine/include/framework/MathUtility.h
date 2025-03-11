@@ -1,5 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <cmath>
+
 
 namespace st {
     sf::Vector2f RotationToVector(float rotation);
