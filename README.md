@@ -36,21 +36,34 @@
 - Таймер
 - Коллизии
 
-**Install on Linux**
-Git install:
+## Install on Linux (Ubuntu)
+First install some required packeges (if not installed):
+
+**Git**
+```bash
 sudo add-apt-repository ppa:git-core/ppa
 sudo apt update
 sudo apt install git
+```
 
-Cmake install:
+**Cmake**
+```bash
 sudo snap install cmake --classic
 sudo apt install make
+```
 
-C++ install:
+**C++ install**
+```bash
 sudo apt install build-essential
+```
 
-Create run  bash script installDeps.sh:
 
+------------
+
+
+Then create bash script with dependencies:
+*installDependencies.sh*
+```bash
 sudo apt install -y \
 libx11-dev \
 libxi-dev \
@@ -62,18 +75,29 @@ libopenal-dev \
 libvorbis-dev \
 libflac++-dev \
 libxinerama-dev \
-libxcursor-dev 
+libxcursor-dev
+```
+Give it rights and run:
+```bash
+sudo chmod +x installDependencies.sh:
+./installDependencies.sh
+```
 
-Clone repo and build
+
+Clone a repo and build it:
+```bash
 git clone https://github.com/vitaliinaz777/StarFighter.git
 cd StarFighter/
 mkdir build
 cd build/
 cmake -S .. -B .
 cmake --build .
+```
 
-Run Game:
+Run the Game:
+```bash
 ./StarFighterGame/StarFighterGame
+```
 
-**Have a fan =)**
+**Have a fan!** :smiley:
 
