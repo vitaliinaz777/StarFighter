@@ -37,7 +37,19 @@
 - Коллизии
 
 **Install on Linux**
-installDeps.sh
+Git install:
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
+sudo apt install git
+
+Cmake install:
+sudo snap install cmake --classic
+sudo apt install make
+
+C++ install:
+sudo apt install build-essential
+
+Create run  bash script installDeps.sh:
 
 sudo apt install -y \
 libx11-dev \
@@ -51,3 +63,17 @@ libvorbis-dev \
 libflac++-dev \
 libxinerama-dev \
 libxcursor-dev 
+
+Clone repo and build
+git clone https://github.com/vitaliinaz777/StarFighter.git
+cd StarFighter/
+mkdir build
+cd build/
+cmake -S .. -B .
+cmake --build .
+
+Run Game:
+./StarFighterGame/StarFighterGame
+
+**Have a fan =)**
+
