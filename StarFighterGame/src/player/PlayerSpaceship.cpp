@@ -13,6 +13,8 @@ namespace st
     {
     }
 
+    PlayerSpaceship::~PlayerSpaceship() {}; // to resolve pimpl problem
+
     void PlayerSpaceship::Tick(float deltaTime)
     {
         Spaceship::Tick(deltaTime);
