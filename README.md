@@ -99,14 +99,13 @@ Clone a repo and build it:
 git clone https://github.com/vitaliinaz777/StarFighter.git
 cd StarFighter/
 mkdir build
-cd build/
-cmake -S .. -B .
-cmake --build .
+cmake -S . -B build/
+cmake --build build/
 ```
 
 Run the Game:
 ```bash
-./StarFighterGame/StarFighterGame
+./build/StarFighterGame/StarFighterGame 
 ```
 
 **Have a fan!** :smiley:
