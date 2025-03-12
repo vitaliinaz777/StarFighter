@@ -12,7 +12,6 @@ namespace st
         if (!physicsSystem) {
             physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
         }
-
         return *physicsSystem;
     }
 
