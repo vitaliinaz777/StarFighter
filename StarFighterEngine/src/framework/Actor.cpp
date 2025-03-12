@@ -112,9 +112,43 @@ sf::Vector2f st::Actor::GetActorRightDirection() const
     return RotationToVector(GetActorRotation() + 90.0f);
 }
 
+sf::FloatRect st::Actor::GetActorGlobalBounds() const
+{
+    return mSprite.getGlobalBounds();
+}
+
 sf::Vector2u st::Actor::GetWindowsSize() const
 {
     return mOwningWorld->GetWindowSize();
+}
+
+bool st::Actor::IsActorOutOfWindowBounds() const
+{
+    float windowWidth = GetWorld()->GetWindowSize().x;
+    float windowHeight = GetWorld()->GetWindowSize().y;
+
+    float width = GetActorGlobalBounds().width;
+    float height = GetActorGlobalBounds().height;
+
+    sf::Vector2f actorPos = GetActorLocation();
+
+    if (actorPos.x < -width) {
+        return true;
+    }
+
+    if (actorPos.x > windowWidth + width) {
+        return true;
+    }
+
+    if (actorPos.y > windowHeight + height) {
+        return true;
+    }
+
+    if (actorPos.y < -height) {
+        return true;
+    }
+
+    return false;
 }
 
 void st::Actor::CenterPivot()

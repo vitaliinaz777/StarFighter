@@ -33,10 +33,13 @@ namespace st
 
         sf::Vector2f GetActorForwardDirection() const;
         sf::Vector2f GetActorRightDirection() const;
+        sf::FloatRect GetActorGlobalBounds() const;
 
         sf::Vector2u GetWindowsSize() const;
 
         World* GetWorld() const { return mOwningWorld; };
+
+        bool IsActorOutOfWindowBounds() const;
 
         // TODO: Implement scaling and other transformations
 
