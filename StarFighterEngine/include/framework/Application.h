@@ -36,7 +36,7 @@ namespace st
         float mClaenCycleInterval;
     };
 
-    // template implementation must be in the header file!!!
+    // template implementation must be in the header file!
     template<typename WorldType>
     weak<WorldType> Application::LoadWorld()
     {

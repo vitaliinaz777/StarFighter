@@ -25,6 +25,7 @@ namespace st
         weak<ActorType> SpawnActor(Args... args);
 
         sf::Vector2u GetWindowSize() const;
+        void CleanCycle();
 
     private:
         void BeginPlay();

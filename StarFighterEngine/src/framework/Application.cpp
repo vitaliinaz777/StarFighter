@@ -61,10 +61,17 @@ namespace st
             currentWorld->TickInternal(deltaTime);
         }
 
-        // Clean unused textures
+        // Clean Cycle
         if (mCleanCycleClock.getElapsedTime().asSeconds() >= mClaenCycleInterval) {
             mCleanCycleClock.restart();
-            AssetManager::Get().CleanCycle();
+
+            // Clean unused textures
+            AssetManager::Get().CleanCycle(); 
+
+            // Clean objects pending to destroy
+            if (currentWorld) {
+                currentWorld->CleanCycle();
+            }
         }
     }
 
