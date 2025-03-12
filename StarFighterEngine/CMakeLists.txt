@@ -51,9 +51,12 @@ target_link_libraries(${STAR_FIGHTER_ENGINE_TARGET_NAME} PUBLIC sfml-system)
 target_link_libraries(${STAR_FIGHTER_ENGINE_TARGET_NAME} PUBLIC sfml-window)
 
 
+
 # Fetch BOX2D_LIB_NAME
 # set variable
 set(BOX2D_LIB_NAME Box2D)
+# disable UnitTests
+set(DBOX2D_BUILD_UNIT_TESTS OFF)
 FetchContent_Declare(
 	${BOX2D_LIB_NAME}
 	GIT_REPOSITORY https://github.com/erincatto/box2d
