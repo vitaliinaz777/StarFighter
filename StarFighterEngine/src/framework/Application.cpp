@@ -1,6 +1,6 @@
 #include "framework/Application.h"
 #include "framework/Core.h"
-#include "framework/World.h"
+//#include "framework/World.h"
 #include "framework/AssetManager.h"
 #include "framework/PhysicsSystem.h"
 
