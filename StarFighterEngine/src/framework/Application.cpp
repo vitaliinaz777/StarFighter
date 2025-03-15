@@ -2,6 +2,7 @@
 #include "framework/Core.h"
 #include "framework/World.h"
 #include "framework/AssetManager.h"
+#include "framework/PhysicsSystem.h"
 
 
 namespace st
@@ -56,10 +57,13 @@ namespace st
     void Application::TickInternal(float deltaTime) {
         Tick(deltaTime);
 
-        // if there is a world loaded, tick it
+        // Update World (if there is a world loaded)
         if (currentWorld) {
             currentWorld->TickInternal(deltaTime);
         }
+
+        // Update Physics
+        PhysicsSystem::Get().Step(deltaTime); // TODO: 
 
         // Clean Cycle
         if (mCleanCycleClock.getElapsedTime().asSeconds() >= mClaenCycleInterval) {
