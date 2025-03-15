@@ -10,7 +10,7 @@ namespace st
     class PhysicsSystem 
     {
     public:
-        static PhysicsSystem Get();
+        static PhysicsSystem& Get();
         void Step(float deltaTime);
         b2Body* AddListener(Actor* listener);
         float GetPhysicsScale() const { return mPhysicsScale; };

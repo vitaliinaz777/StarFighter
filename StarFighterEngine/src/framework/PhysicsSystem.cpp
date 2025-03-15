@@ -13,7 +13,7 @@ namespace st
     // If not you'll get a link error.
     unique<PhysicsSystem> PhysicsSystem::physicsSystem{ nullptr };
 
-    PhysicsSystem PhysicsSystem::Get()
+    PhysicsSystem& PhysicsSystem::Get()
     {
         if (!physicsSystem) {
             physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});

@@ -63,7 +63,7 @@ namespace st
         }
 
         // Update Physics
-        PhysicsSystem::Get().Step(deltaTime); // TODO: 
+        PhysicsSystem::Get().Step(deltaTime); 
 
         // Clean Cycle
         if (mCleanCycleClock.getElapsedTime().asSeconds() >= mClaenCycleInterval) {
