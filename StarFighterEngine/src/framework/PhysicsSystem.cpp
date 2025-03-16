@@ -56,6 +56,11 @@ namespace st
         return body; 
     }
 
+    void PhysicsSystem::RemoveListener(b2Body* bodyToRemove)
+    {
+        // TODO: inplement removal of physics body.
+    }
+
     PhysicsSystem::PhysicsSystem()
         : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f meams no gravity
         mPhysicsScale{0.01f}, // to make everything faster

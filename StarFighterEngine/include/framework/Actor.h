@@ -3,6 +3,7 @@
 #include "framework/Core.h"
 #include "framework/Object.h"
 
+class b2Body; // forward declaration
 
 namespace st
 {
@@ -41,14 +42,21 @@ namespace st
 
         bool IsActorOutOfWindowBounds() const;
 
+        void SetEnablePhysics(bool enable);
+        
         // TODO: Implement scaling and other transformations
-
     private:
+        void InitiallizePhysics();
+        void UnInitiallizePhysics();
+        void UpdatePhysicsBodyTransform();
         void CenterPivot();
         World* mOwningWorld;
         bool mHasBeganPlay;
 
         sf::Sprite mSprite;
         shared<sf::Texture> mTexture;
+        
+        b2Body* mPhysicBody;
+        bool mPhysicsEnabled;
     };
 }

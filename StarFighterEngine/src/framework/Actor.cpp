@@ -1,7 +1,9 @@
+#include <box2D/b2_body.h>
 #include "framework/Actor.h"
-#include "framework/Core.h"
 #include "framework/AssetManager.h"
+#include "framework/Core.h"
 #include "framework/MathUtility.h"
+#include "framework/PhysicsSystem.h"
 #include "framework/World.h" 
 
 namespace st
@@ -10,7 +12,9 @@ namespace st
         : mOwningWorld{ owningWorld },
         mHasBeganPlay{ false },
         mSprite{},
-        mTexture{}
+        mTexture{},
+        mPhysicBody{nullptr}, 
+        mPhysicsEnabled{false}
     {
         SetTexture(texturePath);
     }
@@ -149,6 +153,43 @@ bool st::Actor::IsActorOutOfWindowBounds() const
     }
 
     return false;
+}
+
+void st::Actor::SetEnablePhysics(bool enable)
+{
+    mPhysicsEnabled = enable;
+    if (mPhysicsEnabled) {
+        InitiallizePhysics();
+    }
+    else {
+        UnInitiallizePhysics();
+    }
+}
+
+void st::Actor::InitiallizePhysics()
+{
+    if (!mPhysicBody) {
+        mPhysicBody = PhysicsSystem::Get().AddListener(this);
+    }
+}
+
+void st::Actor::UnInitiallizePhysics()
+{
+    if (mPhysicBody) {
+        PhysicsSystem::Get().RemoveListener(mPhysicBody);
+    }
+}
+
+void st::Actor::UpdatePhysicsBodyTransform()
+{
+    if (mPhysicBody) {
+        float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+        b2Vec2 pos{GetActorLocation().x * physicsScale,
+                   GetActorLocation().y * physicsScale};
+        float rotation = DegreesToRadians(GetActorRotation());
+
+        mPhysicBody->SetTransform(pos, rotation);
+    }
 }
 
 void st::Actor::CenterPivot()
