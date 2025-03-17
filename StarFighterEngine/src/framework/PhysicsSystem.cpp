@@ -26,6 +26,11 @@ namespace st
 
     void PhysicsSystem::Step(float deltaTime)
     {
+        // Basicly we claen listeners afeter calling function currentWorld->TickInternal(deltaTime)
+        // in Application.TickInternal(),
+        // and before Step() finction in PhysicsSystem class
+        ProcessPendingRemoveListeners();
+
         mPhysicsWorld.Step(deltaTime, mVelocityIterations, mPositionIterations);
     }
 
@@ -61,7 +66,7 @@ namespace st
 
     void PhysicsSystem::RemoveListener(b2Body* bodyToRemove)
     {
-        // TODO: inplement removal of physics body.
+        mPendingRemoveListeners.insert(bodyToRemove);
     }
 
     PhysicsSystem::PhysicsSystem()
@@ -69,10 +74,20 @@ namespace st
         mPhysicsScale{0.01f}, // to make everything faster
         mVelocityIterations{8},
         mPositionIterations{3},
-        mContactListener{}
+        mContactListener{},
+        mPendingRemoveListeners{}
     {
         mPhysicsWorld.SetContactListener(&mContactListener);
         mPhysicsWorld.SetAllowSleeping(false);
+    }
+
+    void PhysicsSystem::ProcessPendingRemoveListeners()
+    {
+        for (auto listener : mPendingRemoveListeners) {
+            mPhysicsWorld.DestroyBody(listener);
+        }
+
+        mPendingRemoveListeners.clear();
     }
 
     void PhysicsContactListener::BeginContact(b2Contact* contact)

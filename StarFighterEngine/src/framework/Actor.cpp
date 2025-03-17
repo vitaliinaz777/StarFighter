@@ -180,6 +180,12 @@ namespace st
 
     }
 
+    void Actor::Destroy()
+    {
+        UnInitiallizePhysics();
+        Object::Destroy();
+    }
+
     void Actor::InitiallizePhysics()
     {
         if (!mPhysicBody) {
@@ -191,6 +197,7 @@ namespace st
     {
         if (mPhysicBody) {
             PhysicsSystem::Get().RemoveListener(mPhysicBody);
+            mPhysicBody = nullptr;
         }
     }
 

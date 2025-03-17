@@ -45,6 +45,7 @@ namespace st
         void SetEnablePhysics(bool enable);
         virtual void OnActorBeginOverlap(Actor* other);
         virtual void OnActorEndOverlap(Actor* other);
+        virtual void Destroy();
 
         // TODO: Implement scaling and other transformations
     private:

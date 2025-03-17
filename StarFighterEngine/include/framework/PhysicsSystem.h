@@ -21,12 +21,21 @@ namespace st
         void Step(float deltaTime);
         b2Body* AddListener(Actor* listener);
         void RemoveListener(b2Body* bodyToRemove);
+
         float GetPhysicsScale() const { return mPhysicsScale; };
+
+        // Completely purge the physiscs system and recreate a new one.
+        // Useful when we have a new world or a new map loaded.
+        static void Cleanup() {
+            physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
+        }
 
     protected:
         PhysicsSystem();
 
     private:
+        void ProcessPendingRemoveListeners();
+
         static unique<PhysicsSystem> physicsSystem;
         b2World mPhysicsWorld;
 
@@ -35,5 +44,7 @@ namespace st
         int mPositionIterations;
 
         PhysicsContactListener mContactListener;
+
+        Set<b2Body*> mPendingRemoveListeners;
     };
 }
