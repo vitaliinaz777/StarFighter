@@ -1,4 +1,5 @@
 #include <box2d/b2_body.h>
+#include <box2d/b2_fixture.h>
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
 #include "framework/Core.h"
@@ -14,6 +15,7 @@ namespace st
         mSprite{},
         mTexture{},
         mPhysicBody{nullptr}, 
+        mPhysicBodyRect{},
         mPhysicsEnabled{false}
     {
         SetTexture(texturePath);
@@ -62,138 +64,181 @@ namespace st
         mSprite.setTextureRect(sf::IntRect{ sf::Vector2i{}, sf::Vector2i{textureWidth, textureHeight } });
         CenterPivot();
     }
-}
 
-void st::Actor::Render(sf::RenderWindow& window)
-{
-    // don't drow if pending for destroy
-    if (IsPendingDestroy()) {
-        return;
+    void Actor::Render(sf::RenderWindow& window)
+    {
+        // don't drow if pending for destroy
+        if (IsPendingDestroy()) {
+            return;
+        }
+
+        window.draw(mSprite);
+        window.draw(mPhysicBodyRect);
     }
 
-    window.draw(mSprite);
-}
-
-void st::Actor::SetActorLocation(const sf::Vector2f& newLoc)
-{
-    mSprite.setPosition(newLoc);
-}
-
-void st::Actor::AddActorLocationOffset(const sf::Vector2f& offsetAmt)
-{
-    //mSprite.move(offsetAmt);
-    SetActorLocation(GetActorLocation() + offsetAmt);
-}
-
-sf::Vector2f st::Actor::GetActorLocation() const
-{
-    return mSprite.getPosition();
-}
-
-void st::Actor::SetActorRotation(float NewRotation)
-{
-    mSprite.setRotation(NewRotation);
-}
-
-void st::Actor::AddActorRotationOffset(float offsetAmt)
-{
-    //mSprite.rotate(offsetAmt);
-    SetActorRotation(GetActorRotation() + offsetAmt);
-}
-
-float st::Actor::GetActorRotation() const
-{
-    return mSprite.getRotation();
-}
-
-sf::Vector2f st::Actor::GetActorForwardDirection() const
-{
-    return RotationToVector(GetActorRotation());
-}
-
-sf::Vector2f st::Actor::GetActorRightDirection() const
-{
-    return RotationToVector(GetActorRotation() + 90.0f);
-}
-
-sf::FloatRect st::Actor::GetActorGlobalBounds() const
-{
-    return mSprite.getGlobalBounds();
-}
-
-sf::Vector2u st::Actor::GetWindowsSize() const
-{
-    return mOwningWorld->GetWindowSize();
-}
-
-bool st::Actor::IsActorOutOfWindowBounds() const
-{
-    float windowWidth = GetWorld()->GetWindowSize().x;
-    float windowHeight = GetWorld()->GetWindowSize().y;
-
-    float width = GetActorGlobalBounds().width;
-    float height = GetActorGlobalBounds().height;
-
-    sf::Vector2f actorPos = GetActorLocation();
-
-    if (actorPos.x < -width) {
-        return true;
+    void Actor::SetActorLocation(const sf::Vector2f& newLoc)
+    {
+        mSprite.setPosition(newLoc);
+        UpdatePhysicsBodyTransform();
     }
 
-    if (actorPos.x > windowWidth + width) {
-        return true;
+    void Actor::AddActorLocationOffset(const sf::Vector2f& offsetAmt)
+    {
+        //mSprite.move(offsetAmt);
+        SetActorLocation(GetActorLocation() + offsetAmt);
     }
 
-    if (actorPos.y > windowHeight + height) {
-        return true;
+    sf::Vector2f Actor::GetActorLocation() const
+    {
+        return mSprite.getPosition();
     }
 
-    if (actorPos.y < -height) {
-        return true;
+    void Actor::SetActorRotation(float newRotation)
+    {
+        mSprite.setRotation(newRotation);
+        UpdatePhysicsBodyTransform();
     }
 
-    return false;
-}
-
-void st::Actor::SetEnablePhysics(bool enable)
-{
-    mPhysicsEnabled = enable;
-    if (mPhysicsEnabled) {
-        InitiallizePhysics();
+    void Actor::AddActorRotationOffset(float offsetAmt)
+    {
+        //mSprite.rotate(offsetAmt);
+        SetActorRotation(GetActorRotation() + offsetAmt);
     }
-    else {
-        UnInitiallizePhysics();
+
+    float Actor::GetActorRotation() const
+    {
+        return mSprite.getRotation();
     }
-}
 
-void st::Actor::InitiallizePhysics()
-{
-    if (!mPhysicBody) {
-        mPhysicBody = PhysicsSystem::Get().AddListener(this);
+    sf::Vector2f Actor::GetActorForwardDirection() const
+    {
+        return RotationToVector(GetActorRotation());
     }
-}
 
-void st::Actor::UnInitiallizePhysics()
-{
-    if (mPhysicBody) {
-        PhysicsSystem::Get().RemoveListener(mPhysicBody);
+    sf::Vector2f Actor::GetActorRightDirection() const
+    {
+        return RotationToVector(GetActorRotation() + 90.0f);
     }
-}
 
-void st::Actor::UpdatePhysicsBodyTransform()
-{
-    if (mPhysicBody) {
-        float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
-        b2Vec2 pos{GetActorLocation().x * physicsScale,
-                   GetActorLocation().y * physicsScale};
-        float rotation = DegreesToRadians(GetActorRotation());
-
-        mPhysicBody->SetTransform(pos, rotation);
+    sf::FloatRect Actor::GetActorGlobalBounds() const
+    {
+        return mSprite.getGlobalBounds();
     }
-}
 
-void st::Actor::CenterPivot()
-{
-    sf::FloatRect bound = mSprite.getGlobalBounds();
-    mSprite.setOrigin(bound.width / 2.f, bound.height / 2.f);
+    sf::Vector2u Actor::GetWindowsSize() const
+    {
+        return mOwningWorld->GetWindowSize();
+    }
+
+    bool Actor::IsActorOutOfWindowBounds() const
+    {
+        float windowWidth = GetWorld()->GetWindowSize().x;
+        float windowHeight = GetWorld()->GetWindowSize().y;
+
+        float width = GetActorGlobalBounds().width;
+        float height = GetActorGlobalBounds().height;
+
+        sf::Vector2f actorPos = GetActorLocation();
+
+        if (actorPos.x < -width) {
+            return true;
+        }
+
+        if (actorPos.x > windowWidth + width) {
+            return true;
+        }
+
+        if (actorPos.y > windowHeight + height) {
+            return true;
+        }
+
+        if (actorPos.y < -height) {
+            return true;
+        }
+
+        return false;
+    }
+
+    void Actor::SetEnablePhysics(bool enable)
+    {
+        mPhysicsEnabled = enable;
+        if (mPhysicsEnabled) {
+            InitiallizePhysics();
+        } else {
+            UnInitiallizePhysics();
+        }
+    }
+
+    void Actor::OnActorBeginOverlap(Actor* other)
+    {
+        LOG("Overlapped");
+    }
+
+    void Actor::OnActorEndOverlap(Actor* other)
+    {
+        LOG("Overlap finished");
+
+    }
+
+    void Actor::InitiallizePhysics()
+    {
+        if (!mPhysicBody) {
+            mPhysicBody = PhysicsSystem::Get().AddListener(this);
+        }
+    }
+
+    void Actor::UnInitiallizePhysics()
+    {
+        if (mPhysicBody) {
+            PhysicsSystem::Get().RemoveListener(mPhysicBody);
+        }
+    }
+
+    void Actor::UpdatePhysicsBodyTransform()
+    {
+        if (mPhysicBody) {
+            float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+            b2Vec2 pos{ GetActorLocation().x * physicsScale, 
+                        GetActorLocation().y * physicsScale };
+            float rotation = DegreesToRadians(GetActorRotation());
+
+            mPhysicBody->SetTransform(pos, rotation);
+
+            UpdatePhysicsBodyRect();
+        }
+    }
+
+    void Actor::UpdatePhysicsBodyRect()
+    {
+        float physicsScale = 1 / PhysicsSystem::Get().GetPhysicsScale();
+
+        // size
+        Actor* actor = reinterpret_cast<Actor*>(mPhysicBody->GetUserData().pointer);
+        mPhysicBodyRect.setSize(sf::Vector2f(actor->mSprite.getTextureRect().width,
+                                             actor->mSprite.getTextureRect().height));
+
+        // color
+        mPhysicBodyRect.setOutlineColor(sf::Color::Red);
+        mPhysicBodyRect.setFillColor(sf::Color::Transparent);
+
+        // thikness
+        mPhysicBodyRect.setOutlineThickness(2);
+
+        // position
+        mPhysicBodyRect.setPosition(sf::Vector2f{ mPhysicBody->GetPosition().x * physicsScale,
+                                                  mPhysicBody->GetPosition().y * physicsScale });
+
+        // rotation
+        mPhysicBodyRect.setRotation(RadiansToDegrees(mPhysicBody->GetAngle()));
+
+        // origin
+        sf::FloatRect bounds = actor->mSprite.getLocalBounds();
+        mPhysicBodyRect.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+    }
+
+    void Actor::CenterPivot()
+    {
+        sf::FloatRect bound = mSprite.getGlobalBounds();
+        mSprite.setOrigin(bound.width / 2.f, bound.height / 2.f);
+    }
 }

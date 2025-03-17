@@ -43,12 +43,15 @@ namespace st
         bool IsActorOutOfWindowBounds() const;
 
         void SetEnablePhysics(bool enable);
-        
+        virtual void OnActorBeginOverlap(Actor* other);
+        virtual void OnActorEndOverlap(Actor* other);
+
         // TODO: Implement scaling and other transformations
     private:
         void InitiallizePhysics();
         void UnInitiallizePhysics();
         void UpdatePhysicsBodyTransform();
+        void UpdatePhysicsBodyRect();
         void CenterPivot();
         World* mOwningWorld;
         bool mHasBeganPlay;
@@ -57,6 +60,7 @@ namespace st
         shared<sf::Texture> mTexture;
         
         b2Body* mPhysicBody;
+        sf::RectangleShape mPhysicBodyRect;
         bool mPhysicsEnabled;
     };
 }

@@ -30,7 +30,11 @@ namespace st
         testPalyerSpaceship.lock()->SetActorRotation(-90.f);
         //testPalyerSpaceship.lock()->SetVelocity(sf::Vector2f(0.f, -200.f));
 
-        counter = 0.f;
+        weak<Spaceship> testSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
+        testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
+        testSpaceship.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
+
+        //counter = 0.f;
     }
     void GameApplication::Tick(float deltaTime)
     {

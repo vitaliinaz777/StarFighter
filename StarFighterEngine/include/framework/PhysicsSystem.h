@@ -5,6 +5,13 @@
 namespace st
 {
     class Actor; // forward declaration
+    
+    // implement b2ContactListener class to get contact inforamtion
+    class PhysicsContactListener : public b2ContactListener
+    {
+        virtual void BeginContact(b2Contact* contact) override;
+        virtual void EndContact(b2Contact* contact) override;
+    };
 
     // Singelton class
     class PhysicsSystem 
@@ -22,9 +29,11 @@ namespace st
     private:
         static unique<PhysicsSystem> physicsSystem;
         b2World mPhysicsWorld;
-        float mPhysicsScale;
 
+        float mPhysicsScale;
         int mVelocityIterations;
         int mPositionIterations;
+
+        PhysicsContactListener mContactListener;
     };
 }
