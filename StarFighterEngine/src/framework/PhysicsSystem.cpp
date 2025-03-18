@@ -74,7 +74,7 @@ namespace st
     }
 
     PhysicsSystem::PhysicsSystem()
-        : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f meams no gravity
+        : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f means no gravity
         mPhysicsScale{0.01f}, // to make everything faster
         mVelocityIterations{8},
         mPositionIterations{3},

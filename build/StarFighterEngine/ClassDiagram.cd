@@ -1,49 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="st::World" Collapsed="true">
-    <Position X="7.25" Y="2" Width="1.5" />
+    <Position X="2.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAEBBAAAAAEIACCCAAAAAACQAAAABAAAAAgQAA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\World.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::Actor" Collapsed="true">
-    <Position X="3" Y="2.25" Width="1.5" />
+    <Position X="0.75" Y="3" Width="1.5" />
     <TypeIdentifier>
       <HashCode>wEAAACIMMAEBgABUYAIAACIAAiBAAYQAABoBAABgYQA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\Actor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::Application" Collapsed="true">
-    <Position X="5.5" Y="1" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAgAAABAAEAAAIAAAAAAAABEAQgAAABgAAgAAQAI=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\Application.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::AssetManager" Collapsed="true">
-    <Position X="7.25" Y="1" Width="1.5" />
+    <Position X="4.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CBAEAAAQAAAAAABAAAAiAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\AssetManager.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::Object" Collapsed="true">
-    <Position X="3" Y="1" Width="1.5" />
+    <Position X="0.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAQAAgAAAAAAAQAABAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\Object.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::PhysicsContactListener" Collapsed="true">
-    <Position X="9" Y="1" Width="2" />
+    <Position X="6.75" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\PhysicsSystem.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="st::PhysicsSystem" Collapsed="true">
-    <Position X="5.5" Y="2" Width="1.5" />
+    <Position X="6.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAARBABAAABAEIAAQAIAAAIAAAAFAAoAA=</HashCode>
       <FileName>P:\Projects\StarFighter\StarFighterEngine\include\framework\PhysicsSystem.h</FileName>

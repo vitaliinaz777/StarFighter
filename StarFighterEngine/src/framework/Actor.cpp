@@ -57,11 +57,11 @@ namespace st
     {
         mTexture = AssetManager::Get().LoadTexture(texturePath);
         if (!mTexture) return; // if the texture is not loaded, return
-        mSprite.setTexture(*mTexture);
+        mSprite.setTexture(*mTexture, true);
 
-        int textureWidth = mTexture->getSize().x;
-        int textureHeight = mTexture->getSize().y;
-        mSprite.setTextureRect(sf::IntRect{ sf::Vector2i{}, sf::Vector2i{textureWidth, textureHeight } });
+        //int textureWidth = mTexture->getSize().x;
+        //int textureHeight = mTexture->getSize().y;
+        //mSprite.setTextureRect(sf::IntRect{ sf::Vector2i{}, sf::Vector2i{textureWidth, textureHeight } });
         CenterPivot();
     }
 

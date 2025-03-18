@@ -21,8 +21,10 @@ namespace st
         void NormalizeInput();
         void ClampInputOnEdge();
         void ConsumeInput(float deltaTime);  // consume the input 
+        
         // and set the velocity of the spaceship
         sf::Vector2f mMoveInput; // direction
+        
         float mSpeed;
 
         unique<BulletShooter> mShooter;
