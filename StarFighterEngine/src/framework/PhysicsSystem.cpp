@@ -69,6 +69,10 @@ namespace st
         mPendingRemoveListeners.insert(bodyToRemove);
     }
 
+    void PhysicsSystem::Cleanup() {
+        physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
+    }
+
     PhysicsSystem::PhysicsSystem()
         : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f meams no gravity
         mPhysicsScale{0.01f}, // to make everything faster

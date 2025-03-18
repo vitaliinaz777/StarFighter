@@ -26,9 +26,7 @@ namespace st
 
         // Completely purge the physiscs system and recreate a new one.
         // Useful when we have a new world or a new map loaded.
-        static void Cleanup() {
-            physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
-        }
+        static void Cleanup();
 
     protected:
         PhysicsSystem();
