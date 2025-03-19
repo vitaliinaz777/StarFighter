@@ -4,7 +4,8 @@ namespace st
 {
     Spaceship::Spaceship(World* owningWorld, const std::string& texturePath)
         : Actor{ owningWorld, texturePath },
-        mVelocity{ 0.0f, 0.0f }
+        mVelocity{ 0.0f, 0.0f },
+        mHealthComp{ 100.f, 100.f}
     {
     }
     void Spaceship::Tick(float deltaTime)

@@ -8,6 +8,9 @@ add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
 	${CMAKE_CURRENT_SOURCE_DIR}/include/gameFramework/GameApplication.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/gameplay/HealthComponent.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/gameplay/HealthComponent.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/spaceship/Spaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spaceship/Spaceship.cpp
 
