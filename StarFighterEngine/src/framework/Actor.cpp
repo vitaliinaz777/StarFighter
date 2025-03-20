@@ -229,7 +229,7 @@ namespace st
         mPhysicBodyRect.setFillColor(sf::Color::Transparent);
 
         // thikness
-        mPhysicBodyRect.setOutlineThickness(2);
+        mPhysicBodyRect.setOutlineThickness(1.f);
 
         // position
         mPhysicBodyRect.setPosition(sf::Vector2f{ mPhysicBody->GetPosition().x * physicsScale,

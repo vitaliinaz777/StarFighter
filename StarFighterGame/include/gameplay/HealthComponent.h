@@ -1,4 +1,5 @@
 #pragma once
+#include "framework/Delegate.h"
 
 namespace st
 {
@@ -9,6 +10,8 @@ namespace st
         void ChangeHealth( float amount);
         float GetHealth() const { return mHealth; }
         float GetMaxHealth() const { return mMaxHealth; }
+
+        Delegate<float, float, float> onHealthChangedDelegate;
 
     private:
         void TakenDamage(float amount);

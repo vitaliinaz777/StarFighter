@@ -11,6 +11,9 @@ add_library(${STAR_FIGHTER_ENGINE_TARGET_NAME} STATIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Core.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Core.cpp
 
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Delegate.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Delegate.cpp
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/MathUtility.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/MathUtility.cpp
 

@@ -1,52 +1,57 @@
-# Дипломная работа
+# Diploma thesis
 ### Star Fighter. Project "Armada"
-Финальный проект курса OTUS C++ 2024
+Final project of the OTUS C++ 2024 course
 
-**Описание проекта:**
-Игра в жанре Space Invaders.
+**Project description:**
+A game in the ""Space Invaders genre.
 
-**Правила игры:**
-- Убивать противников (зарабатывая при этом очки) 
-- Уворачиваться от встречного огня и препятствий
-- Собирать ресурсы
-- Убить босса
-- Перейти на следующий уровень
-- Достичь максимального кол-ва очков и закончить игру =)
 
-**Элементы приложения:**
-- Космический корабль
-- Враг
-- Босс
-- Жизнь/Урон
-- Оружие (3 вида)
-- Ресурсы (оружие, жизни)
-- UI (кнопки, текст, полоска жизни, жизни, очки)
+**Rules of the game:**
+- Kill enemies (get points)
+- Dodge oncoming fire and obstacles
+- Collect resources
+- Kill the boss
+- Go to the next level
+- Reach the maximum number of points and finish the game :smiley:
 
-**Технологии:**
-- Библиотека SFML
+**Game elements:**
+- Spaceship
+- Enemy
+- Boss
+- Life/Damage
+- Weapons (3 types)
+- Resources (weapons, lives)
+- UI (buttons, text, life bar, lives, points)
+
+**Tech stack:**
+- C++ Core
+- SFML library
 - Box2D
 - Cmake
 - Git
 
-**Модули игрового движка:**
-- Само приложение игры
-- Уровни
-- Акторы
-- Ассеты и ресурсы
-- Делегаты
-- Таймер
-- Коллизии
+**Game Engine modules:**
+- The game application
+- Level (World)
+- Actor (Object)
+- Assets and resources
+- Delegate
+- Timer
+- Collisions detection
 
-**Темы реализованные в проекте:**
-- ООП, Инкпсуляция, Наследование, Полиморфизм
-- Паттерны проектирования
-- Шаблоны
-- Cтруктуры данных
-- Умные указатели
-- Исключения
-- Векторы, Матрицы
+**Subjects implemented in the project:**
+- OOP, Encapsulation, Composition, Inheritance, Polymorphism
+- Design Patterns and Ideoms: 
+  	Singleton: AssetManager, PhysicsSystem
+ 	 Delegation: Delegate
+ 	 Callbacks: Delegate::BindAction(weak<Object> obj, void(ClassName::*callback)(Args...))
+- Templates
+- Data Structure
+- Smart Pointers
+- Exceptions
 
-## Install on Linux (Ubuntu)
+
+## Run on Linux (Ubuntu)
 First install some required packeges (if not installed):
 
 **Git**
@@ -56,7 +61,7 @@ sudo apt update
 sudo apt install git
 ```
 
-**Cmake**
+**Cmake 3.27.7 or higher**
 ```bash
 sudo snap install cmake --classic
 sudo apt install make
@@ -109,3 +114,6 @@ Run the Game:
 ```
 
 **Have a fan!** :smiley:
+
+## Run on Windows
+// TODO
