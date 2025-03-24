@@ -31,8 +31,11 @@ namespace st {
                         'static_cast<ClassName*>(obj.lock().get())->'   means 'Spaceship'
                         *callback'   means 'OnHealthChanged()'
                         /*/
+                    } else {
+                        LOG("Error: Attempting to bind action to an expired object.");
+                        return false;
                     }
-                    return false;
+
                 };
 
             mCallbacks.push_back(callbackFunc);
@@ -48,6 +51,11 @@ namespace st {
                     iter = mCallbacks.erase(iter);
                 }
             }
+        }
+
+        void Clear() {
+            // TODO: check correctness
+            mCallbacks.clear();
         }
 
     private:

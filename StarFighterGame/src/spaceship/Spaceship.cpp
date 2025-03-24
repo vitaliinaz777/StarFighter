@@ -40,6 +40,8 @@ namespace st
         */
         mHealthComp.onHealthChangedDelegate.BindAction(GetWeakRef(), &Spaceship::OnHealthChanged);
         mHealthComp.onHealthChangedDelegate.Broadcast(11, 89, 100);
+
+        onDestroyDelegate.BindAction(GetWeakRef(), &Spaceship::OnDestroy);
     }
 
     // Callback function
@@ -47,4 +49,12 @@ namespace st
     {
         LOG("health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
     }
+
+    // Callback function
+    void Spaceship::OnDestroy(Object* obj) {
+        
+        // Clean up or invalidate any delegates referencing this object
+        //mHealthComp.onHealthChangedDelegate.Clear();
+    }
+
 }

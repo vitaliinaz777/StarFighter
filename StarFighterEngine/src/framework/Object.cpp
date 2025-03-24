@@ -14,7 +14,7 @@ namespace st {
     
     void Object::Destroy()
     {
-        onDestroy.Broadcast(this);
+        onDestroyDelegate.Broadcast(this);
         mIsPendingDestroy = true;
     }
     

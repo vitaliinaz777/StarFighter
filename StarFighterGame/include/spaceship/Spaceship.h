@@ -14,6 +14,7 @@ namespace st {
 
     private:
         void OnHealthChanged(float amount, float health, float maxHealth);
+        void OnDestroy(Object* obj);
         sf::Vector2f mVelocity;
         HealthComponent mHealthComp;
     };

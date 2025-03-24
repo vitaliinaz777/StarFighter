@@ -38,14 +38,14 @@ namespace st
     }
     void GameApplication::Tick(float deltaTime)
     {
-        /*
+        
         counter += deltaTime;
         if (counter > 10.f) {
             if (!testPalyerSpaceship.expired()) {
                 testPalyerSpaceship.lock()->Destroy();
             }
         }
-        */
+       
 
         //counter += deltaTime;
         //if (counter > 0.5f)

@@ -18,7 +18,7 @@ namespace st {
         weak<const Object> GetWeakRef() const;
 
         // TODO: complete onDestroy functionality
-        Delegate<Object*> onDestroy;
+        Delegate<Object*> onDestroyDelegate;
 
     private:
         bool mIsPendingDestroy;
