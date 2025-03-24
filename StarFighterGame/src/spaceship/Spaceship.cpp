@@ -5,7 +5,7 @@ namespace st
     Spaceship::Spaceship(World* owningWorld, const std::string& texturePath)
         : Actor{ owningWorld, texturePath },
         mVelocity{ 0.0f, 0.0f },
-        mHealthComp{ 100.f, 100.f}
+        mHealthComp{ 100.f, 100.f }
     {
     }
 
@@ -29,20 +29,22 @@ namespace st
     {
         Actor::BeginPlay();
         SetEnablePhysics(true);
-        
+
         /*
-        This function that accepts(bind) a callback.
+        Function BindAction() accepts(bind) a callback.
         Basicly any function is a pointer to some piece of code in 'code segment' in memory.
-        &Spaceship::OnHealthChanged - is an address of function OnHealthChanged() 
+        &Spaceship::OnHealthChanged - is an address of function OnHealthChanged()
                                       in a memory.
         We passing this address as an second argument to function BindAction(),
-        [ void(ClassName::*callback)(Args...) ]  <--- [ &Spaceship::OnHealthChanged ]
+        [ void(ClassName::*callback)(Args...) ]  <---  [ &Spaceship::OnHealthChanged ]
         */
         mHealthComp.onHealthChangedDelegate.BindAction(GetWeakRef(), &Spaceship::OnHealthChanged);
+        mHealthComp.onHealthChangedDelegate.Broadcast(11, 89, 100);
     }
 
     // Callback function
     void Spaceship::OnHealthChanged(float amount, float health, float maxHealth)
     {
+        LOG("health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
     }
 }

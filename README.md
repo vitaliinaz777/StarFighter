@@ -50,6 +50,8 @@ A game in the ""Space Invaders genre.
 - Smart Pointers
 - Exceptions
 
+**Resources:**
+- Space Shooter (Redux, plus fonts and sounds) by Kenney Vleugels (www.kenney.nl). License (CC0)
 
 ## Run on Linux (Ubuntu)
 First install some required packeges (if not installed):

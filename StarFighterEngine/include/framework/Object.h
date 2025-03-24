@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include "framework/Core.h"
+#include "framework/Delegate.h"
 
 namespace st {
     // Base class for all objects in the game
@@ -14,7 +15,10 @@ namespace st {
         bool IsPendingDestroy() const { return mIsPendingDestroy; }
 
         weak<Object> GetWeakRef();
-        weak<const Object> GetWeakRef() const ;
+        weak<const Object> GetWeakRef() const;
+
+        // TODO: complete onDestroy functionality
+        Delegate<Object*> onDestroy;
 
     private:
         bool mIsPendingDestroy;
