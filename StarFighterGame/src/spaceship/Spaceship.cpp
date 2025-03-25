@@ -5,7 +5,10 @@ namespace st
     Spaceship::Spaceship(World* owningWorld, const std::string& texturePath)
         : Actor{ owningWorld, texturePath },
         mVelocity{ 0.0f, 0.0f },
-        mHealthComp{ 100.f, 100.f }
+        mHealthComp{ 100.f, 100.f },
+        mBlinkTime{ 0.f },
+        mBlinkDuration{0.2f},
+        mBlinkColorOffset{255, 0, 0, 255}
     {
     }
 
@@ -14,6 +17,7 @@ namespace st
         Actor::Tick(deltaTime);
 
         AddActorLocationOffset(GetVelocity() * deltaTime); // Move the spaceship
+        UpdateBlink(deltaTime);
     }
 
     void Spaceship::SetVelocity(const sf::Vector2f& newVel)
@@ -45,6 +49,23 @@ namespace st
         onDestroyDelegate.BindAction(GetWeakRef(), &Spaceship::OnDestroy);
     }
 
+    void Spaceship::Blink()
+    {
+        if (mBlinkTime == 0.f) {
+            mBlinkTime = mBlinkDuration;
+        }
+    }
+
+    void Spaceship::UpdateBlink(float deltaTime)
+    {
+        if (mBlinkTime > 0) {
+            mBlinkTime -= deltaTime;
+            mBlinkTime = mBlinkTime > 0 ? mBlinkTime : 0.f; // make mBlinkTime always be more than 0
+
+            GetSprite().setColor(LerpColor(sf::Color::White, mBlinkColorOffset, mBlinkTime));
+        }
+    }
+
     // Callback function
     void Spaceship::OnHealthChanged(float amount, float health, float maxHealth)
     {
@@ -54,6 +75,7 @@ namespace st
     // Callback function
     void Spaceship::OnTakenDamage(float amount, float health, float maxHealth)
     {
+        Blink();
     }
 
     // Callback function

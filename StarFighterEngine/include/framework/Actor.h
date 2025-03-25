@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "framework/Core.h"
 #include "framework/Object.h"
+#include "framework/MathUtility.h"
 
 class b2Body; // forward declaration
 
@@ -38,7 +39,8 @@ namespace st
 
         sf::Vector2u GetWindowsSize() const;
 
-        World* GetWorld() const { return mOwningWorld; };
+        const World* GetWorld() const { return mOwningWorld; }
+        World* GetWorld() { return mOwningWorld; }
 
         bool IsActorOutOfWindowBounds() const;
 
@@ -52,6 +54,9 @@ namespace st
         uint8 GetTeamID() const { return mTeamID; }
         bool IsOtherHostile(Actor* other) const;
         virtual void ApplyDamage(float amount);
+
+        const sf::Sprite& GetSprite() const { return mSprite; }
+        sf::Sprite& GetSprite() { return mSprite; }
 
         // TODO: Implement scaling and other transformations
     private:

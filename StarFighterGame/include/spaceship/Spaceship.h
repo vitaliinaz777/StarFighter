@@ -14,6 +14,9 @@ namespace st {
         virtual void ApplyDamage(float amount) override;
 
     private:
+        void Blink();
+        void UpdateBlink(float deltaTime);
+
         virtual void OnHealthChanged(float amount, float health, float maxHealth);
         virtual void OnTakenDamage(float amount, float health, float maxHealth);
         virtual void Blow();
@@ -22,5 +25,9 @@ namespace st {
 
         sf::Vector2f mVelocity;
         HealthComponent mHealthComp;
+
+        float mBlinkTime;
+        float mBlinkDuration;
+        sf::Color mBlinkColorOffset;
     };
 }
