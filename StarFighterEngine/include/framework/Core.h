@@ -33,6 +33,9 @@ namespace st {
     template<typename keyType, typename valType, typename hasher = std::hash<keyType>>
     using Dictionary = std::unordered_map<keyType, valType, hasher>;
 
+    // 0-255
+    using uint8 = unsigned char;
+
 
     // macro for logging
     // ... is a variadic argument

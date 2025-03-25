@@ -39,7 +39,8 @@ namespace st
         [ void(ClassName::*callback)(Args...) ]  <---  [ &Spaceship::OnHealthChanged ]
         */
         mHealthComp.onHealthChangedDelegate.BindAction(GetWeakRef(), &Spaceship::OnHealthChanged);
-        mHealthComp.onHealthChangedDelegate.Broadcast(11, 89, 100);
+        mHealthComp.onTakenDamageDelegate.BindAction(GetWeakRef(), &Spaceship::OnTakenDamage);
+        mHealthComp.onHealthEmptyDelegate.BindAction(GetWeakRef(), &Spaceship::Blow);
 
         onDestroyDelegate.BindAction(GetWeakRef(), &Spaceship::OnDestroy);
     }
@@ -47,14 +48,30 @@ namespace st
     // Callback function
     void Spaceship::OnHealthChanged(float amount, float health, float maxHealth)
     {
-        LOG("health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
+        //LOG("health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
+    }
+
+    // Callback function
+    void Spaceship::OnTakenDamage(float amount, float health, float maxHealth)
+    {
+    }
+
+    // Callback function
+    void Spaceship::Blow()
+    {
+        Destroy();
+    }
+
+    // Callback function
+    void Spaceship::ApplyDamage(float amount)
+    {
+        mHealthComp.ChangeHealth(-amount); // negative amount
     }
 
     // Callback function
     void Spaceship::OnDestroy(Object* obj) {
-        
+
         // Clean up or invalidate any delegates referencing this object
         //mHealthComp.onHealthChangedDelegate.Clear();
     }
-
 }

@@ -11,12 +11,13 @@ namespace st
         float GetHealth() const { return mHealth; }
         float GetMaxHealth() const { return mMaxHealth; }
 
-        Delegate<float,float,float> onHealthChangedDelegate;
+        Delegate<float, float, float> onHealthChangedDelegate;
+        Delegate<float, float, float> onTakenDamageDelegate;
+        Delegate<> onHealthEmptyDelegate;
 
     private:
         void TakenDamage(float amount);
         void HealthEmpty();
-        void HealthRegen(float amount);
         
         float mHealth;        
         float mMaxHealth;

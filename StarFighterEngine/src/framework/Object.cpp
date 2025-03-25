@@ -9,7 +9,7 @@ namespace st {
     
     Object::~Object()
     {
-        LOG("Object destroyed");
+        //LOG("Object destroyed");
     }
     
     void Object::Destroy()

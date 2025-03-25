@@ -11,6 +11,7 @@ namespace st {
         mCooldownTime{ cooldownTime }
     {
     }
+
     bool BulletShooter::IsOnCooldown() const
     {
         if (mCooldownClock.getElapsedTime().asSeconds() > mCooldownTime) {
@@ -19,6 +20,7 @@ namespace st {
             return true;
         }
     }
+
     void BulletShooter::ShootImpl()
     {
         mCooldownClock.restart();

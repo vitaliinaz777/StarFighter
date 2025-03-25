@@ -33,6 +33,7 @@ namespace st
         weak<Spaceship> testSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
         testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
         testSpaceship.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
+        testSpaceship.lock()->SetTeamID(2);
 
         counter = 0.f;
     }
@@ -40,11 +41,11 @@ namespace st
     {
         
         counter += deltaTime;
-        if (counter > 10.f) {
-            if (!testPalyerSpaceship.expired()) {
-                testPalyerSpaceship.lock()->Destroy();
-            }
-        }
+        //if (counter > 10.f) {
+        //    if (!testPalyerSpaceship.expired()) {
+        //        testPalyerSpaceship.lock()->Destroy();
+        //    }
+        //}
        
 
         //counter += deltaTime;

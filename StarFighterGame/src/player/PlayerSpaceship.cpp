@@ -11,6 +11,7 @@ namespace st
         mSpeed{ 200.f },
         mShooter{ new BulletShooter{this, 0.1f} }
     {
+        SetTeamID(1);
     }
 
     PlayerSpaceship::~PlayerSpaceship() {}; // to resolve pimpl problem with nique<BulletShooter> mShooter

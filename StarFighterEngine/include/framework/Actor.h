@@ -47,6 +47,12 @@ namespace st
         virtual void OnActorEndOverlap(Actor* other);
         virtual void Destroy();
 
+        void SetTeamID(uint8 teamID) { mTeamID = teamID; }
+        static uint8 GetNeutarlTeamID() { return neutralTeamID; }
+        uint8 GetTeamID() const { return mTeamID; }
+        bool IsOtherHostile(Actor* other) const;
+        virtual void ApplyDamage(float amount);
+
         // TODO: Implement scaling and other transformations
     private:
         void InitiallizePhysics();
@@ -63,5 +69,8 @@ namespace st
         b2Body* mPhysicBody;
         sf::RectangleShape mPhysicBodyRect;
         bool mPhysicsEnabled;
+
+        uint8 mTeamID;
+        const static uint8 neutralTeamID = 255;
     };
 }

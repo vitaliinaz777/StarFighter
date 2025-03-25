@@ -64,16 +64,28 @@ namespace st {
 }
 
 /*
-Callback is a function that is passed as an argument to another function. 
+    Callback is a function that is passed as an argument to another function. 
 In C++, we cannot directly use the function name to pass them as a callback. 
 We use function pointers to pass callbacks to other functions, 
 then store them in data structures, and invoke them later.
 
-Wrapper class 'std::function' is a template class in C++ 
+    Wrapper class 'std::function' is a template class in C++ 
 that is used to wrap a particular function
 or any other callable object such as a lambda, or function object. 
 It is generally used to write generic code where we need to pass functions as arguments 
 in another function (callbacks). 
 It avoids the creation of extra overloads of the function 
 that may take similar callback functions as arguments.
+
+    Also we use exactly 'std::function' not an odinary function pointer, 
+because we want Lambda to catch external parameters like 'obj' and '*calback'.
+If we will use insted of 'std::function' a function pointer, like this:
+From:
+    std::function<bool (Args...)> callbackFunc = LAMBDA
+To:
+    bool (*callbackFunc)(Args...) = LAMBDA
+
+It won't let us capture an external value of 'obj' and '*calback'.
+Because a captureles Lambda will be converted implicitly or explicitly to
+a function poiner.
 */

@@ -27,25 +27,20 @@ namespace st
             if (mHealth <= 0) { // probably dead
                 HealthEmpty();
             }
-        } else {
-            HealthRegen(amount);
-        }
+        } 
+
+        onHealthChangedDelegate.Broadcast(amount, mHealth, mMaxHealth);
     }
     
     void HealthComponent::TakenDamage(float amount)
     {
-        LOG("Took damage: %f, now health is: %f,%f", amount, mHealth, mMaxHealth);
+        //LOG("Took damage: %f, now health is: %f,%f", amount, mHealth, mMaxHealth);
+        onTakenDamageDelegate.Broadcast(amount, mHealth, mMaxHealth);
     }
     
     void HealthComponent::HealthEmpty()
     {
-        LOG("Dead");
-
-    }
-    
-    void HealthComponent::HealthRegen(float amount)
-    {
-        LOG("Health regened: %f, now health is: %f,%f", amount, mHealth, mMaxHealth);
-
+        //LOG("Dead");
+        onHealthEmptyDelegate.Broadcast();
     }
 }

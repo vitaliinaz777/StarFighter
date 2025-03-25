@@ -14,16 +14,17 @@ namespace st
         mHasBeganPlay{ false },
         mSprite{},
         mTexture{},
-        mPhysicBody{nullptr}, 
+        mPhysicBody{ nullptr }, 
         mPhysicBodyRect{},
-        mPhysicsEnabled{false}
+        mPhysicsEnabled{ false },
+        mTeamID{ GetNeutarlTeamID()}
     {
         SetTexture(texturePath);
     }
 
     Actor::~Actor()
     {
-        LOG("Actor destroyed");
+        //LOG("Actor destroyed");
     }
 
     void Actor::BeginPlayInternal()
@@ -45,7 +46,7 @@ namespace st
 
     void Actor::BeginPlay()
     {
-        LOG("Actor::BeginPlay");
+        //LOG("Actor::BeginPlay");
     }
 
     void Actor::Tick(float deltaTime)
@@ -171,19 +172,28 @@ namespace st
 
     void Actor::OnActorBeginOverlap(Actor* other)
     {
-        LOG("Overlapped");
+        //LOG("Overlapped");
     }
 
     void Actor::OnActorEndOverlap(Actor* other)
     {
-        LOG("Overlap finished");
-
+        //LOG("Overlap finished");
     }
 
     void Actor::Destroy()
     {
         UnInitiallizePhysics();
         Object::Destroy();
+    }
+
+    bool Actor::IsOtherHostile(Actor* other) const
+    {
+        // if any of two is netural
+        if (GetTeamID() == GetNeutarlTeamID() || other->GetTeamID() == GetNeutarlTeamID()) {
+            return false; // we are not enemies
+        }
+
+        return GetTeamID() != other->GetTeamID();
     }
 
     void Actor::InitiallizePhysics()
@@ -247,5 +257,9 @@ namespace st
     {
         sf::FloatRect bound = mSprite.getGlobalBounds();
         mSprite.setOrigin(bound.width / 2.f, bound.height / 2.f);
+    }
+
+    void Actor::ApplyDamage(float amount) {
+
     }
 }

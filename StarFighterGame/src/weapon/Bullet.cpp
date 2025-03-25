@@ -2,13 +2,14 @@
 
 namespace st
 {
-    Bullet::Bullet(World* world, Actor* owner, const std::string& texturePath, float speed, float damage)
+    Bullet::Bullet(World* world, Actor* owner, const std::string& texturePath, 
+                   float speed, float damage)
         : Actor{ world, texturePath },
         mOwner{ owner },
         mSpeed{ speed },
         mDamage{ damage }
     {
-
+        SetTeamID(owner->GetTeamID());
     }
 
     void Bullet::SetSpeed(float newSpeed)
@@ -16,9 +17,9 @@ namespace st
         mSpeed = newSpeed;
     }
 
-    void Bullet::SetDamage(float newDaamge)
+    void Bullet::SetDamage(float newDamage)
     {
-        mDamage = newDaamge;
+        mDamage = newDamage;
     }
 
     void Bullet::Tick(float deltaTime)
@@ -34,6 +35,14 @@ namespace st
     {
         Actor::BeginPlay();
         SetEnablePhysics(true);
+    }
+
+    void Bullet::OnActorBeginOverlap(Actor* other)
+    {
+        if (IsOtherHostile(other)) {
+            other->ApplyDamage(GetDamage());
+            Destroy(); // destoy ourself(bullet)
+        }
     }
 
     void Bullet::Move(float deltaTime)
