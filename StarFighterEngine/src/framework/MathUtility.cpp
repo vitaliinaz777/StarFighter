@@ -1,4 +1,5 @@
 #include "framework/MathUtility.h"
+#include <random>
 
 namespace st {
     const float PI = 3.14159265359f;
@@ -21,14 +22,16 @@ namespace st {
     }
 
     // lerp(start, finish, alpha) = start * (1 - alpha) + finish * alpha
-    float LerpFloat(float a, float b, float alpha) {
+    float LerpFloat(float a, float b, float alpha) 
+    {
         if (alpha > 1) alpha = 1;
         if (alpha < 0) alpha = 0;
 
         return a + (b - a) * alpha;
     }
 
-    sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha) {
+    sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha) 
+    {
         int lerpR = LerpFloat(a.r, b.r, alpha);
         int lerpG = LerpFloat(a.g, b.g, alpha);
         int lerpB = LerpFloat(a.b, b.b, alpha);
@@ -37,10 +40,30 @@ namespace st {
         return sf::Color(lerpR, lerpG, lerpB, lerpA);
     }
 
-    sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha) {
+    sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha) 
+    {
         int lerpX = LerpFloat(a.x, b.x, alpha);
         int lerpY = LerpFloat(a.y, b.y, alpha);
 
         return sf::Vector2f(lerpX, lerpY);
+    }
+
+    float RandomRange(float min, float max)
+    {
+        std::random_device rd;
+        std::mt19937 generator(rd());
+        std::uniform_real_distribution<float> distribution{ min, max };
+
+        return distribution(generator);
+    }
+
+    sf::Vector2f RandomUnitVector()
+    {
+        float randomX = RandomRange(-1, 1);
+        float randomY = RandomRange(-1, 1);
+        sf::Vector2f randomVec{ randomX, randomY };
+        Normalize(randomVec);
+        
+        return randomVec;
     }
 }

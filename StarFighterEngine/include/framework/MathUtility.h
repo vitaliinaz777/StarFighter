@@ -37,7 +37,9 @@ namespace st {
     }
 
     float LerpFloat(float a, float b, float alpha);
-
     sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha);
     sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha);
+
+    float RandomRange(float min, float max);
+    sf::Vector2f RandomUnitVector();
 }

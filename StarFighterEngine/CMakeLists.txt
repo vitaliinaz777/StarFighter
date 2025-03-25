@@ -1,4 +1,7 @@
 add_library(${STAR_FIGHTER_ENGINE_TARGET_NAME} STATIC
+	${CMAKE_CURRENT_SOURCE_DIR}/include/main.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Actor.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Actor.cpp
 
@@ -17,9 +20,6 @@ add_library(${STAR_FIGHTER_ENGINE_TARGET_NAME} STATIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/MathUtility.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/MathUtility.cpp
 
-	${CMAKE_CURRENT_SOURCE_DIR}/include/main.h
-	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
-
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Object.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Object.cpp
 
@@ -28,7 +28,10 @@ add_library(${STAR_FIGHTER_ENGINE_TARGET_NAME} STATIC
 	
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/World.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/World.cpp
- "src/framework/PhysicsSystem.cpp")
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Particle.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Particle.cpp
+)
 
 target_include_directories(${STAR_FIGHTER_ENGINE_TARGET_NAME} PUBLIC 
  	${CMAKE_CURRENT_SOURCE_DIR}/include
