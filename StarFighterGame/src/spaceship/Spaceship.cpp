@@ -1,4 +1,6 @@
 #include "spaceship/Spaceship.h"
+#include "framework/MathUtility.h"
+#include "VFX/Explosion.h"
 
 namespace st
 {
@@ -81,7 +83,10 @@ namespace st
     // Callback function
     void Spaceship::Blow()
     {
+        Explosion* exp = new Explosion();
+        exp->SpawnExplosion(GetWorld(), GetActorLocation());
         Destroy();
+        delete exp;
     }
 
     // Callback function

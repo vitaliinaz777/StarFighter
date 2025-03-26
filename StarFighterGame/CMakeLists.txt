@@ -20,6 +20,8 @@ add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/player/PlayerSpaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceship.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Explosion.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Explosion.cpp
 )
 
 target_include_directories(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC 
