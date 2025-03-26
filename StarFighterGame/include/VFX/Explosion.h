@@ -10,13 +10,13 @@ namespace st
     class Explosion
     {
     public:
-        Explosion(int particleAmt = 30,
-                  float lifeTimeMin = 2.f,
-                  float lifeTimeMax = 5.f,
+        Explosion(int particleAmt = 20,
+                  float lifeTimeMin = 0.75f,
+                  float lifeTimeMax = 1.5f,
                   float sizeMin = 1,
                   float sizeMax = 3,
-                  float speedMin = 300,
-                  float speedMax = 500,
+                  float speedMin = 200,
+                  float speedMax = 400,
                   sf::Color particleColor = sf::Color{ 255, 128, 0, 255},
                   const List<std::string>& particleImagePaths = {
                     "SpaceShooterRedux/PNG/Effects/star1.png",

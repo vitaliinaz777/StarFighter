@@ -30,20 +30,24 @@ namespace st {
         return a + (b - a) * alpha;
     }
 
-    sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha) 
+    sf::Color LerpColor(const sf::Color& a, const sf::Color& b, float alpha, float alphaFactor)
     {
-        int lerpR = LerpFloat(a.r, b.r, alpha);
-        int lerpG = LerpFloat(a.g, b.g, alpha);
-        int lerpB = LerpFloat(a.b, b.b, alpha);
-        int lerpA = LerpFloat(a.a, b.a, alpha);
+        float alphaF = alpha / alphaFactor;
+
+        int lerpR = LerpFloat(a.r, b.r, alphaF);
+        int lerpG = LerpFloat(a.g, b.g, alphaF);
+        int lerpB = LerpFloat(a.b, b.b, alphaF);
+        int lerpA = LerpFloat(a.a, b.a, alphaF);
 
         return sf::Color(lerpR, lerpG, lerpB, lerpA);
     }
 
-    sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha) 
+    sf::Vector2f LerpVector(const sf::Vector2f& a, const sf::Vector2f& b, float alpha, float alphaFactor)
     {
-        int lerpX = LerpFloat(a.x, b.x, alpha);
-        int lerpY = LerpFloat(a.y, b.y, alpha);
+        float alphaF = alpha * alphaFactor;
+
+        float lerpX = LerpFloat(a.x, b.x, alphaF);
+        float lerpY = LerpFloat(a.y, b.y, alphaF);
 
         return sf::Vector2f(lerpX, lerpY);
     }

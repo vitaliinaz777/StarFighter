@@ -18,6 +18,7 @@ namespace st
         Move(deltaTime);
         Fade(deltaTime);
 
+        //LOG("mLifeTime: %f", mTimer.getElapsedTime().asSeconds());
         if (mTimer.getElapsedTime().asSeconds() >= mLifeTime) {
             Destroy();
         }
@@ -44,10 +45,11 @@ namespace st
         AddActorLocationOffset(mVelocity * deltaTime);
     }
 
+    // TODO: fix fade. Particle effects disappear too fast
     void Particle::Fade(float deltaTime)
     {
         float elapsedTime = mTimer.getElapsedTime().asSeconds();
-        GetSprite().setColor(LerpColor(GetSprite().getColor(), sf::Color(255, 255, 255, 0), elapsedTime / mLifeTime));
-        GetSprite().setScale(LerpVector(GetSprite().getScale(), sf::Vector2f{0,0}, elapsedTime / mLifeTime));
+        GetSprite().setColor(LerpColor(GetSprite().getColor(), sf::Color(255, 255, 255, 0), elapsedTime / mLifeTime, .5f));
+        GetSprite().setScale(LerpVector(GetSprite().getScale(), sf::Vector2f{0,0}, elapsedTime / mLifeTime, .5f));
     }
 }
