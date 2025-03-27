@@ -11,9 +11,23 @@
 
 namespace st
 {
-    // variable "physicsSystem" is static, 
+    PhysicsSystem::PhysicsSystem()
+        : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f means no gravity
+        mPhysicsScale{ 0.01f }, // to make everything faster
+        mVelocityIterations{ 8 },
+        mPositionIterations{ 3 },
+        mContactListener{},
+        mPendingRemoveListeners{}
+    {
+        // Set b2ContactListener to listen for contact events and trigger 'BeginContact()' and 'EndContact()' signals
+        mPhysicsWorld.SetContactListener(&mContactListener);
+
+        mPhysicsWorld.SetAllowSleeping(false);
+    }
+
+    // Variable 'physicsSystem' is static, 
     // so it needs to have starting value to be compiled.
-    // If not you'll get a link error.
+    // If not, you'll get a link error.
     unique<PhysicsSystem> PhysicsSystem::physicsSystem{ nullptr };
 
     PhysicsSystem& PhysicsSystem::Get()
@@ -21,14 +35,15 @@ namespace st
         if (!physicsSystem) {
             physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
         }
+
         return *physicsSystem;
     }
 
     void PhysicsSystem::Step(float deltaTime)
     {
-        // Basicly we claen listeners afeter calling function currentWorld->TickInternal(deltaTime)
-        // in Application.TickInternal(),
-        // and before Step() finction in PhysicsSystem class
+        // Basicly we claen listeners afeter calling function 'currentWorld->TickInternal(deltaTime)'
+        // in 'Application::TickInternal()' function,
+        // and before 'b2World::Step()' function in PhysicsSystem class
         ProcessPendingRemoveListeners();
 
         mPhysicsWorld.Step(deltaTime, mVelocityIterations, mPositionIterations);
@@ -56,8 +71,7 @@ namespace st
         fixtureDef.shape = &shape;
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.3f;
-        fixtureDef.isSensor = true; // collects contact information, 
-                                    // but never generates a collision response.
+        fixtureDef.isSensor = true; // collects contact information, but never generates a collision response.
 
         body->CreateFixture(&fixtureDef);
 
@@ -69,20 +83,11 @@ namespace st
         mPendingRemoveListeners.insert(bodyToRemove);
     }
 
-    void PhysicsSystem::Cleanup() {
-        physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
-    }
-
-    PhysicsSystem::PhysicsSystem()
-        : mPhysicsWorld{ b2Vec2{0.f,0.f} }, // 0.f,0.f means no gravity
-        mPhysicsScale{0.01f}, // to make everything faster
-        mVelocityIterations{8},
-        mPositionIterations{3},
-        mContactListener{},
-        mPendingRemoveListeners{}
+    // Completely purge the physics system and recreate a new one.
+    // Useful when we have a new world or a new map loaded.
+    void PhysicsSystem::Cleanup() 
     {
-        mPhysicsWorld.SetContactListener(&mContactListener);
-        mPhysicsWorld.SetAllowSleeping(false);
+        physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
     }
 
     void PhysicsSystem::ProcessPendingRemoveListeners()

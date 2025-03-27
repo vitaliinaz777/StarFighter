@@ -203,6 +203,7 @@ namespace st
         }
     }
 
+    // Delete ridgid body
     void Actor::UnInitiallizePhysics()
     {
         if (mPhysicBody) {

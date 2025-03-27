@@ -6,9 +6,11 @@ namespace st
     HealthComponent::HealthComponent(float health, float maxHealth)
         : mHealth{health},
         mMaxHealth{maxHealth}
-    { }
+    { 
+    }
 
-    void HealthComponent::ChangeHealth(float amount) {
+    void HealthComponent::ChangeHealth(float amount) 
+    {
         if (amount == 0) { return; } // no damdage or regen
         if (mHealth == 0) { return; } // probably dead
 

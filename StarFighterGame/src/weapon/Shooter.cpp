@@ -1,10 +1,11 @@
 #include "weapon/Shooter.h"
 
-namespace st {
+namespace st 
+{
     void Shooter::Shoot()
     {
         if (CanShoot() && !IsOnCooldown()) {
-            ShootImpl(); // child slass implementation
+            ShootImpl(); // child class implementation
         }
     }
 

@@ -17,7 +17,7 @@ namespace st
         virtual void BeginPlay() override;
 
     private:
-        virtual void OnActorBeginOverlap(Actor* other) override;
+        virtual void OnActorBeginOverlap(Actor* other) override; // signaled by PhysicsContactListener::BeginContact()
         void Move(float deltaTime);
 
         Actor* mOwner;

@@ -54,7 +54,8 @@ namespace st
         return mWindow.getSize();
     }
 
-    void Application::TickInternal(float deltaTime) {
+    void Application::TickInternal(float deltaTime) 
+    {
         Tick(deltaTime);
 
         // Update World (if there is a world loaded)
@@ -69,7 +70,7 @@ namespace st
         if (mCleanCycleClock.getElapsedTime().asSeconds() >= mClaenCycleInterval) {
             mCleanCycleClock.restart();
 
-            // Clean unused textures
+            // Clean unused assets
             AssetManager::Get().CleanCycle(); 
 
             // Clean objects pending to destroy
@@ -79,12 +80,16 @@ namespace st
         }
     }
 
-    void Application::RenderInternal() {
+    void Application::RenderInternal() 
+    {
         mWindow.clear();
-
         Render();
-
         mWindow.display();
+    }
+
+    void Application::Tick(float deltaTime)
+    {
+        //LOG("Application tick");
     }
 
     void Application::Render()
@@ -92,9 +97,5 @@ namespace st
         if (currentWorld) {
             currentWorld->Render(mWindow);
         }
-    }
-    void Application::Tick(float deltaTime)
-    {
-        //LOG("Application tick");
     }
 }

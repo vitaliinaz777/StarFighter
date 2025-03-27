@@ -2,7 +2,8 @@
 #include "framework/Actor.h"
 #include "gameplay/HealthComponent.h"
 
-namespace st {
+namespace st 
+{
     class Spaceship : public Actor {
     public:
         Spaceship(World* owningWorld, const std::string& texturePath = "");
@@ -24,6 +25,7 @@ namespace st {
         void OnDestroy(Object* obj);
 
         sf::Vector2f mVelocity;
+
         HealthComponent mHealthComp;
 
         float mBlinkTime;

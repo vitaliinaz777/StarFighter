@@ -2,7 +2,9 @@
 #include <functional>
 #include "framework/Core.h"
 
-namespace st {
+namespace st 
+{
+    // forward declaration
     class Object;
 
     template<typename... Args>
@@ -13,7 +15,7 @@ namespace st {
         template<typename ClassName>
         void BindAction(weak<Object> obj, void(ClassName::*callback)(Args...)) // obj listen to this delegate
         {
-            // Wrapper
+            // Wrapper std::function
             std::function<bool (Args...)> callbackFunc = 
                 // Lambda
                 [obj, callback](Args... args)->bool // return bool
@@ -25,23 +27,24 @@ namespace st {
                         Call member function stored in '*calback' on an object stored in 'obj'
                         obj -> *calback() 
                         i.e.
-                        Spaceship.OnHealthChanged())
+                        Spaceship.OnHealthChanged(args...)
                         
                         cast from pointer 'Object*' to actual pointer (e.g. 'Spaceship*)
                         'static_cast<ClassName*>(obj.lock().get())->'   means 'Spaceship'
-                        *callback'   means 'OnHealthChanged()'
+                        '*callback'   means 'OnHealthChanged()'
                         /*/
                     } else {
                         LOG("Error: Attempting to bind action to an expired object.");
                         return false;
                     }
 
-                };
-
+                }
+            ;
             mCallbacks.push_back(callbackFunc);
         }
 
-        void Broadcast(Args... args) {
+        void Broadcast(Args... args) 
+        {
             for (auto iter = mCallbacks.begin(); iter != mCallbacks.end();)
             {
                 if ((*iter)(args...)) {
@@ -53,13 +56,14 @@ namespace st {
             }
         }
 
-        void Clear() {
+        void Clear() 
+        {
             // TODO: check correctness
             mCallbacks.clear();
         }
 
     private:
-        List<std::function<bool(Args...)>> mCallbacks; // if bool 'false' remove function from calbacks
+        List<std::function<bool(Args...)>> mCallbacks; // if bool 'false' remove function from callbacks
     };
 }
 
@@ -67,7 +71,7 @@ namespace st {
     Callback is a function that is passed as an argument to another function. 
 In C++, we cannot directly use the function name to pass them as a callback. 
 We use function pointers to pass callbacks to other functions, 
-then store them in data structures, and invoke them later.
+then store these pointers in data structures, and invoke them later.
 
     Wrapper class 'std::function' is a template class in C++ 
 that is used to wrap a particular function

@@ -9,7 +9,7 @@ namespace st
         mSpeed{ speed },
         mDamage{ damage }
     {
-        SetTeamID(owner->GetTeamID());
+        SetTeamID(owner->GetTeamID()); // TeamID of Spaceship
     }
 
     void Bullet::SetSpeed(float newSpeed)
@@ -37,11 +37,13 @@ namespace st
         SetEnablePhysics(true);
     }
 
+    // Signaled by PhysicsContactListener::BeginContact()
     void Bullet::OnActorBeginOverlap(Actor* other)
     {
+        // if 'other' is an enemy apply damage
         if (IsOtherHostile(other)) {
             other->ApplyDamage(GetDamage());
-            Destroy(); // destoy ourself(bullet)
+            Destroy(); // destoy itself (bullet)
         }
     }
 

@@ -65,13 +65,14 @@ namespace st
         void UpdatePhysicsBodyTransform();
         void UpdatePhysicsBodyRect();
         void CenterPivot();
+        
         World* mOwningWorld;
         bool mHasBeganPlay;
 
         sf::Sprite mSprite;
         shared<sf::Texture> mTexture;
         
-        b2Body* mPhysicBody;
+        b2Body* mPhysicBody; // rigid body
         sf::RectangleShape mPhysicBodyRect;
         bool mPhysicsEnabled;
 
