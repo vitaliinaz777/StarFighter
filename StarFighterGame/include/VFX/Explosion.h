@@ -11,10 +11,10 @@ namespace st
     {
     public:
         Explosion(int particleAmt = 20,
-                  float lifeTimeMin = 0.75f,
+                  float lifeTimeMin = 0.5f,
                   float lifeTimeMax = 1.5f,
                   float sizeMin = 1,
-                  float sizeMax = 3,
+                  float sizeMax = 4,
                   float speedMin = 200,
                   float speedMax = 400,
                   sf::Color particleColor = sf::Color{ 255, 128, 0, 255},
