@@ -45,7 +45,6 @@ namespace st
         AddActorLocationOffset(mVelocity * deltaTime);
     }
 
-    // TODO: fix fade. Particle effects disappear too fast
     void Particle::Fade(float deltaTime)
     {
         float elapsedTime = mTimer.getElapsedTime().asSeconds();

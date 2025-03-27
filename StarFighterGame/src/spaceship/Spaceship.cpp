@@ -6,7 +6,7 @@ namespace st
 {
     Spaceship::Spaceship(World* owningWorld, const std::string& texturePath)
         : Actor{ owningWorld, texturePath },
-        mVelocity{ 0.0f, 0.0f },
+        mVelocity{ 10.0f, 10.0f },
         mHealthComp{ 100.f, 100.f },
         mBlinkTime{ 0.f },
         mBlinkDuration{0.2f},
@@ -37,10 +37,9 @@ namespace st
         SetEnablePhysics(true);
 
         /*
-        Function BindAction() accepts(bind) a callback.
+        Function BindAction() accepts(bind) a callback function.
         Basicly any function is a pointer to some piece of code in 'code segment' in memory.
-        &Spaceship::OnHealthChanged - is an address of function OnHealthChanged()
-                                      in a memory.
+        &Spaceship::OnHealthChanged - is an address of function OnHealthChanged() in a memory.
         We passing this address as an second argument to function BindAction(),
         [ void(ClassName::*callback)(Args...) ]  <---  [ &Spaceship::OnHealthChanged ]
         */
@@ -64,6 +63,7 @@ namespace st
             mBlinkTime -= deltaTime;
             mBlinkTime = mBlinkTime > 0 ? mBlinkTime : 0.f; // make mBlinkTime always be more than 0
 
+            // mBlinkTime is alpha parameter
             GetSprite().setColor(LerpColor(sf::Color::White, mBlinkColorOffset, mBlinkTime));
         }
     }
@@ -96,9 +96,9 @@ namespace st
     }
 
     // Callback function
-    void Spaceship::OnDestroy(Object* obj) {
-
-        // Clean up or invalidate any delegates referencing this object
+    void Spaceship::OnDestroy(Object* obj) 
+    {
+        // TODO: Clean up or invalidate any delegates referencing this object
         //mHealthComp.onHealthChangedDelegate.Clear();
     }
 }

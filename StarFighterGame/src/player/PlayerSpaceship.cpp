@@ -14,7 +14,7 @@ namespace st
         SetTeamID(1);
     }
 
-    PlayerSpaceship::~PlayerSpaceship() {}; // to resolve pimpl problem with nique<BulletShooter> mShooter
+    PlayerSpaceship::~PlayerSpaceship() {}; // TODO: added destructor to resolve pimpl problem with nique<BulletShooter> mShooter
 
     void PlayerSpaceship::Tick(float deltaTime)
     {
@@ -85,7 +85,7 @@ namespace st
     // Consume the input and set the velocity of the spaceship
     void PlayerSpaceship::ConsumeInput(float deltaTime)
     {
-        SetVelocity(mMoveInput * mSpeed); // 
+        SetVelocity(mMoveInput * mSpeed);
 
         // reset the input
         mMoveInput.x = 0.f;

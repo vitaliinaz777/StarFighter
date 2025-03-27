@@ -65,6 +65,7 @@ namespace st
         void UpdatePhysicsBodyTransform();
         void UpdatePhysicsBodyRect();
         void CenterPivot();
+        
         World* mOwningWorld;
         bool mHasBeganPlay;
 

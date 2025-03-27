@@ -39,9 +39,10 @@ namespace st
 
     void Bullet::OnActorBeginOverlap(Actor* other)
     {
+        // if 'other' is an enemy apply damage
         if (IsOtherHostile(other)) {
             other->ApplyDamage(GetDamage());
-            Destroy(); // destoy ourself(bullet)
+            Destroy(); // destoy itself (bullet)
         }
     }
 

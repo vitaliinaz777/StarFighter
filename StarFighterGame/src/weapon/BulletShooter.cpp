@@ -4,7 +4,8 @@
 #include "framework/World.h"
 
 
-namespace st {
+namespace st 
+{
     BulletShooter::BulletShooter(Actor* owner, float cooldownTime)
         : Shooter(owner),
         mCooldownClock{},
