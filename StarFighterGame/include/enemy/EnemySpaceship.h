@@ -10,6 +10,7 @@ namespace st
         virtual void Tick(float deltaTime) override;
 
     private:
+        // The player will explode when he hits an enemy.
         virtual void OnActorBeginOverlap(Actor* other) override;
 
         float mCollisionDamage;

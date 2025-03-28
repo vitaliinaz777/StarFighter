@@ -1,5 +1,5 @@
 #include "enemy/Vanguard.h"
-#include "weapon/BulletShooter.h"
+//#include "weapon/BulletShooter.h"
 
 namespace st
 {

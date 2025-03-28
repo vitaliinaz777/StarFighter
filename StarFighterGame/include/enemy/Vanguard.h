@@ -1,9 +1,10 @@
 #pragma once
 #include "enemy/EnemySpaceship.h"
+#include "weapon/BulletShooter.h"
 
 namespace st
 {
-    class BulletShooter;
+    //class BulletShooter;
 
     class Vanguard : public EnemySpaceship
     {

@@ -17,6 +17,7 @@ namespace st
         }
     }
 
+    // The player will explode when he hits an enemy.
     void EnemySpaceship::OnActorBeginOverlap(Actor* other)
     {
         Spaceship::OnActorBeginOverlap(other);
