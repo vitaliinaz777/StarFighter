@@ -2,7 +2,9 @@
 #include <SFML/System.hpp>
 #include "weapon/Shooter.h"
 
-namespace st {
+namespace st 
+{
+    // It will be added to Spaceships as a "component"
     class BulletShooter : public Shooter {
     public:
         BulletShooter(Actor* owner, float cooldownTime = 1.f);

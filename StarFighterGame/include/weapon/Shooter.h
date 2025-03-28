@@ -5,10 +5,10 @@ namespace st
     // forward declaration
     class Actor;
 
-    // Abstract class
+    // Abstract class. It will be added to Spaceships as a "component"
     class Shooter {
     public:
-        void Shoot();
+        void Shoot(); // shoot interface
 
         virtual bool CanShoot() const { return true; }
         virtual bool IsOnCooldown() const { return false; }

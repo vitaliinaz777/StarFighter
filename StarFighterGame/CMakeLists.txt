@@ -1,9 +1,9 @@
 add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Bullet.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Bullet.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/include/enemy/EnemySpaceship.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/enemy/EnemySpaceship.cpp
 
-	${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/BulletShooter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/BulletShooter.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/enemy/Vanguard.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/enemy/Vanguard.cpp
 
 	${CMAKE_CURRENT_SOURCE_DIR}/include/gameFramework/GameApplication.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
@@ -14,14 +14,20 @@ add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/spaceship/Spaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/spaceship/Spaceship.cpp
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Shooter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Shooter.cpp
-
     ${CMAKE_CURRENT_SOURCE_DIR}/include/player/PlayerSpaceship.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceship.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Explosion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Explosion.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Bullet.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Bullet.cpp
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/BulletShooter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/BulletShooter.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Shooter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Shooter.cpp
 )
 
 target_include_directories(${STAR_FIGHTER_GAME_TARGET_NAME} PUBLIC 

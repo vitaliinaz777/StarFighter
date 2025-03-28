@@ -2,15 +2,15 @@
 
 namespace st 
 {
+    Shooter::Shooter(Actor* owner)
+        : mOwner{ owner }
+    {
+    }
+
     void Shooter::Shoot()
     {
         if (CanShoot() && !IsOnCooldown()) {
             ShootImpl(); // child class implementation
         }
-    }
-
-    Shooter::Shooter(Actor* owner)
-        : mOwner{ owner }
-    {
     }
 }

@@ -6,7 +6,7 @@ namespace st
 {
     Spaceship::Spaceship(World* owningWorld, const std::string& texturePath)
         : Actor{ owningWorld, texturePath },
-        mVelocity{ 10.0f, 10.0f },
+        mVelocity{},
         mHealthComp{ 100.f, 100.f },
         mBlinkTime{ 0.f },
         mBlinkDuration{0.2f},

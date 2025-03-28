@@ -43,8 +43,8 @@ A game in the ""Space Invaders genre.
 - OOP, Encapsulation, Composition, Inheritance, Polymorphism
 - Design Patterns and Ideoms: 
   	Singleton: AssetManager, PhysicsSystem
- 	 Delegation: Delegate
- 	 Callbacks: Delegate::BindAction(weak<Object> obj, void(ClassName::*callback)(Args...))
+ 	Delegation: Delegate
+ 	Callbacks: Spaceship::OnHealthChanged() and else...
 - Templates
 - Data Structure
 - Smart Pointers

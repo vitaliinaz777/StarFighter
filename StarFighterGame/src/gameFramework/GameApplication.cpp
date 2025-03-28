@@ -2,13 +2,10 @@
 #include "config.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
-#include "framework/World.h"
 #include "gameFramework/GameApplication.h"
 #include "player/PlayerSpaceship.h"
-
-
-
-
+#include "enemy/Vanguard.h"
+#include "framework/World.h"
 
 st::Application* GetApplication()
 {
@@ -30,9 +27,13 @@ namespace st
         testPalyerSpaceship.lock()->SetActorRotation(-90.f);
         //testPalyerSpaceship.lock()->SetVelocity(sf::Vector2f(0.f, -200.f));
 
+        weak<Vanguard> testVanguard= newWorld.lock()->SpawnActor<Vanguard>();
+        testVanguard.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
+        testVanguard.lock()->SetTeamID(2);
+
         weak<Spaceship> testSpaceship = newWorld.lock()->SpawnActor<Spaceship>();
+        testSpaceship.lock()->SetActorLocation(sf::Vector2f(400.f, 50.f));
         testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
-        testSpaceship.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
         testSpaceship.lock()->SetTeamID(2);
 
         counter = 0.f;

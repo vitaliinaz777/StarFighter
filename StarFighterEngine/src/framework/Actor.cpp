@@ -131,8 +131,10 @@ namespace st
         return mOwningWorld->GetWindowSize();
     }
 
-    bool Actor::IsActorOutOfWindowBounds() const
+    bool Actor::IsActorOutOfWindowBounds(float allowance) const
     {
+        // 'allowance' allows the Actor to move beyond the screen before being destroyed
+                 
         float windowWidth = GetWorld()->GetWindowSize().x;
         float windowHeight = GetWorld()->GetWindowSize().y;
 
@@ -141,19 +143,19 @@ namespace st
 
         sf::Vector2f actorPos = GetActorLocation();
 
-        if (actorPos.x < -width) {
+        if (actorPos.x < -width - allowance) {
             return true;
         }
 
-        if (actorPos.x > windowWidth + width) {
+        if (actorPos.x > windowWidth + width + allowance) {
             return true;
         }
 
-        if (actorPos.y > windowHeight + height) {
+        if (actorPos.y < -height - allowance) {
             return true;
         }
 
-        if (actorPos.y < -height) {
+        if (actorPos.y > windowHeight + height + allowance) {
             return true;
         }
 
@@ -188,6 +190,8 @@ namespace st
 
     bool Actor::IsOtherHostile(Actor* other) const
     {
+        if (other == nullptr) return false;
+
         // if any of two is netural
         if (GetTeamID() == GetNeutarlTeamID() || other->GetTeamID() == GetNeutarlTeamID()) {
             return false; // we are not enemies
