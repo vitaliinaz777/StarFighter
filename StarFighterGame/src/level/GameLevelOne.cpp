@@ -30,10 +30,10 @@ namespace st
 
     void GameLevelOne::BeginPlay()
     {
-        TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallback_Test, 10 );
+        TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallback_Test, 2, true );
     }
     void GameLevelOne::TimerCallback_Test()
     {
-        LOG("Test function: GameLevelOne::TimerCallback_Test()");
+        LOG("TimerManager: callback function __ GameLevelOne::TimerCallback_Test() __ is called");
     }
 }

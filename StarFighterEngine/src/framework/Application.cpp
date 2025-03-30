@@ -3,6 +3,7 @@
 //#include "framework/World.h"
 #include "framework/AssetManager.h"
 #include "framework/PhysicsSystem.h"
+#include "framework/TimerManager.h"
 
 
 namespace st
@@ -58,13 +59,13 @@ namespace st
     {
         Tick(deltaTime);
 
-        // Update World (if there is a world loaded)
         if (currentWorld) {
             currentWorld->TickInternal(deltaTime);
         }
 
-        // Update Physics
-        PhysicsSystem::Get().Step(deltaTime); 
+        TimerManager::Get().UpdateTimer(deltaTime);
+
+        PhysicsSystem::Get().Step(deltaTime); // update Physics
 
         // Clean Cycle
         if (mCleanCycleClock.getElapsedTime().asSeconds() >= mClaenCycleInterval) {

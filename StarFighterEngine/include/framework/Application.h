@@ -5,7 +5,7 @@
 
 namespace st
 {
-    class World; // forward declaration
+    //class World; // forward declaration
 
     class Application
     {
