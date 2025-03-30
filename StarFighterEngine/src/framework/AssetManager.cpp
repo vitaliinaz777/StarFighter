@@ -2,15 +2,15 @@
 
 namespace st 
 {
-    AssetManager::AssetManager()
-        : mRootDirectory{ "" }
-    {
-    }
-
     // Variable 'assetManager' is static,
     // so it needs to have starting value to be compiled.
     // If not, you'll get a link error.
     unique<AssetManager> AssetManager::assetManager{ nullptr };
+
+    AssetManager::AssetManager()
+        : mRootDirectory{ "" }
+    {
+    }
 
     AssetManager& AssetManager::Get()
     {

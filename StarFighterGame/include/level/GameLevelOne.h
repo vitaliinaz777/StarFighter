@@ -11,6 +11,9 @@ namespace st
         GameLevelOne(Application* owningApp);
 
     private:
+        virtual void BeginPlay() override;
+        void TimerCallback_Test();
+
         weak<PlayerSpaceship> testPalyerSpaceship;
     };
 }

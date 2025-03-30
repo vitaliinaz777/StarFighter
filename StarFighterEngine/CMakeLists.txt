@@ -26,6 +26,9 @@ add_library(${STAR_FIGHTER_ENGINE_TARGET_NAME} STATIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/PhysicsSystem.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/PhysicsSystem.cpp
 	
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/TimerManager.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/TimerManager.cpp
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/World.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/World.cpp
 

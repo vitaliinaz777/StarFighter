@@ -3,6 +3,7 @@
 #include "framework/AssetManager.h"
 #include "player/PlayerSpaceship.h"
 #include "enemy/Vanguard.h"
+#include "framework/TimerManager.h"
 #include "framework/World.h"
 
 namespace st
@@ -25,5 +26,14 @@ namespace st
         testSpaceship.lock()->SetActorLocation(sf::Vector2f(400.f, 50.f));
         testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
         testSpaceship.lock()->SetTeamID(2);
+    }
+
+    void GameLevelOne::BeginPlay()
+    {
+        TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallback_Test, 10 );
+    }
+    void GameLevelOne::TimerCallback_Test()
+    {
+        LOG("Test function: GameLevelOne::TimerCallback_Test()");
     }
 }

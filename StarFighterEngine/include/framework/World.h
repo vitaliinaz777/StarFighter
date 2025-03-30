@@ -1,15 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "framework/Core.h"
+#include "framework/Object.h"
 
 namespace st
 {
     // Forward declaration of classes to avoid circular dependency
     // Full definition is included where needed
-    class Application;
     class Actor;
+    class Application;
 
-    class World {
+    class World : public Object
+    {
     public:
         World(Application* owningApp);
 
@@ -28,8 +30,8 @@ namespace st
         void CleanCycle();
 
     private:
-        void BeginPlay();
-        void Tick(float deltaTime);
+        virtual void BeginPlay();
+        virtual void Tick(float deltaTime);
 
         Application* mOwningApp; // pointer to the application which owns this world
         bool mBeganPaly;
