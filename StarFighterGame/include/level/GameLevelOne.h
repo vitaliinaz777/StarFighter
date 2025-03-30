@@ -15,5 +15,7 @@ namespace st
         void TimerCallback_Test();
 
         weak<PlayerSpaceship> testPalyerSpaceship;
+
+        unsigned int timerIndex_Test{0};
     };
 }
