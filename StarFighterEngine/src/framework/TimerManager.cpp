@@ -2,6 +2,21 @@
 
 namespace st
 {
+    // Variable 'timerKeyCounter' is static, 
+    // so it need to have starting value to be compiled.
+    // If not, you'll get a link error.
+    unsigned int TimerIndexHandle::timerKeyCounter = 0;
+
+    TimerIndexHandle::TimerIndexHandle()
+        : mTimerKey{ GetNextTimerKey() }
+    {
+    }
+
+    bool operator==(const TimerIndexHandle& lhs, const TimerIndexHandle& rhs)
+    {
+        return lhs.GetTimerKey() == rhs.GetTimerKey();
+    }
+
     Timer::Timer(weak<Object> weakRef, std::function<void()> callback, float duration, bool repeat)
         : mListener{ weakRef , callback },
         mDuration{ duration },
@@ -39,11 +54,10 @@ namespace st
     }
 
 
-    // Variables 'timerManager' and 'timerIndexCounter' are static, 
-    // so they need to have starting value to be compiled.
+    // Variable 'timerManager' is static, 
+    // so it need to have starting value to be compiled.
     // If not, you'll get a link error.
     unique<TimerManager> TimerManager::timerManager{ nullptr };
-    unsigned int TimerManager::timerIndexCounter = 0;
 
     TimerManager::TimerManager()
         : mTimers{}
@@ -71,9 +85,9 @@ namespace st
         }
     }
 
-    void TimerManager::ClearTimer(unsigned int timerIndex)
+    void TimerManager::ClearTimer(TimerIndexHandle timerIndexHandle)
     {
-        auto iter = mTimers.find(timerIndex);
+        auto iter = mTimers.find(timerIndexHandle);
         if (iter != mTimers.end()) {
             iter->second.SetExpired();
         }

@@ -1,9 +1,39 @@
+#pragma once
 #include <functional>
 #include "framework/Core.h"
 #include "framework/Object.h"
 
 namespace st
 {
+    struct TimerIndexHandle
+    {
+    public:
+        TimerIndexHandle();
+        unsigned int GetTimerKey() const { return mTimerKey; }
+
+    private:
+        static unsigned int GetNextTimerKey() { return ++timerKeyCounter; }
+
+        static unsigned int timerKeyCounter;
+        unsigned int mTimerKey;
+    };
+
+
+    // used as third argument(hash function) in Dictionary
+    struct TimerIndexHandleHashFunction
+    {
+    public:
+        std::size_t operator()(const TimerIndexHandle& timerIndexHandle) const
+        {
+            return timerIndexHandle.GetTimerKey();
+        }
+    };
+
+
+    // Akso used in Dictionary for comparing two 'TimerIndexHandle'
+    bool operator==(const TimerIndexHandle& lhs, const TimerIndexHandle& rhs);
+
+
     // Struct represent different types of timers
     struct Timer
     {
@@ -28,10 +58,10 @@ namespace st
         static TimerManager& Get();
 
         template <typename ClassName>
-        unsigned int SetTimer(weak<Object> weakRef, void(ClassName::*callback)(), float duration, bool repeat = false)
+        TimerIndexHandle SetTimer(weak<Object> weakRef, void(ClassName::*callback)(), float duration, bool repeat = false)
         {
-            ++timerIndexCounter;
-            mTimers.insert({ timerIndexCounter,
+            TimerIndexHandle newHandle{};
+            mTimers.insert({ newHandle,
                            Timer(weakRef,
                                 [=] {(static_cast<ClassName*>(weakRef.lock().get())->*callback)(); }, // this lambda passes in pair 'mListener' to 'std::function<void()> callback'
                                 duration,
@@ -39,19 +69,19 @@ namespace st
                                 )
                            });
             
-            return timerIndexCounter;
+            return newHandle;
         }
 
         void UpdateTimer(float deltaTime);
 
-        void ClearTimer(unsigned int timerIndex);
+        void ClearTimer(TimerIndexHandle timerIndexHandle);
 
     protected:
         TimerManager();
 
     private:
         static unique<TimerManager> timerManager;
-        static unsigned int timerIndexCounter;
-        Dictionary<unsigned int, Timer> mTimers;
+
+        Dictionary<TimerIndexHandle, Timer, TimerIndexHandleHashFunction> mTimers;
     };
 }
