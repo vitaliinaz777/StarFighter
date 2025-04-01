@@ -8,7 +8,7 @@ namespace st
     unsigned int TimerIndexHandle::timerKeyCounter = 0;
 
     TimerIndexHandle::TimerIndexHandle()
-        : mTimerKey{ GetNextTimerKey() }
+        : mTimerKey{ GenerateNextTimerKey() }
     {
     }
 

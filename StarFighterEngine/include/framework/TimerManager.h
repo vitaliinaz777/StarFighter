@@ -12,7 +12,7 @@ namespace st
         unsigned int GetTimerKey() const { return mTimerKey; }
 
     private:
-        static unsigned int GetNextTimerKey() { return ++timerKeyCounter; }
+        static unsigned int GenerateNextTimerKey() { return ++timerKeyCounter; }
 
         static unsigned int timerKeyCounter;
         unsigned int mTimerKey;
@@ -30,7 +30,7 @@ namespace st
     };
 
 
-    // Akso used in Dictionary for comparing two 'TimerIndexHandle'
+    // Also used in Dictionary for comparing two 'TimerIndexHandle'
     bool operator==(const TimerIndexHandle& lhs, const TimerIndexHandle& rhs);
 
 
@@ -60,16 +60,16 @@ namespace st
         template <typename ClassName>
         TimerIndexHandle SetTimer(weak<Object> weakRef, void(ClassName::*callback)(), float duration, bool repeat = false)
         {
-            TimerIndexHandle newHandle{};
-            mTimers.insert({ newHandle,
-                           Timer(weakRef,
-                                [=] {(static_cast<ClassName*>(weakRef.lock().get())->*callback)(); }, // this lambda passes in pair 'mListener' to 'std::function<void()> callback'
+            TimerIndexHandle timerIndexHandle{};
+
+            mTimers.insert({ timerIndexHandle,
+                           Timer( weakRef,
+                                [=] {(static_cast<ClassName*>(weakRef.lock().get())->*callback)(); }, // this lambda passes in pair 'mListener' to 'std::function<void()> callback' inside struct 'Timer' 
                                 duration,
-                                repeat
-                                )
+                                repeat )
                            });
             
-            return newHandle;
+            return timerIndexHandle;
         }
 
         void UpdateTimer(float deltaTime);

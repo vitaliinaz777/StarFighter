@@ -54,7 +54,7 @@ A game in the "Space Invaders genre"
 - Space Shooter (Redux, plus fonts and sounds) by Kenney Vleugels (www.kenney.nl). License (CC0)
 
 ## Controls
-- Movement: WASD or Up, Down, Left, Right arrows
+- Movement: WASD or &larr;&uarr;&darr; &rarr; arrows
 - Shooting: Space
 
 
