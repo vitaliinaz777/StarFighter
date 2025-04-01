@@ -9,6 +9,7 @@ namespace st
     // Full definition is included where needed
     class Actor;
     class Application;
+    class GameStage;
 
     class World : public Object
     {
@@ -29,6 +30,8 @@ namespace st
         sf::Vector2u GetWindowSize() const;
         void CleanCycle();
 
+        void AddStage(const shared<GameStage>& newStage);
+
     private:
         virtual void BeginPlay();
         virtual void Tick(float deltaTime);
@@ -38,6 +41,13 @@ namespace st
 
         List<shared<Actor>> mActors; // list of actors in the world
         List<shared<Actor>> mPendingActors; // list of actors to be added to the world at the beginning of the frame tick
+        
+        virtual void InitGameStages();
+        virtual void AllGameStageFinished();
+        void NextGameStage();
+        List<shared<GameStage>> mGameStages;
+        int mCurrentStageIndex;
+        
     };
 
     // variadic tamplate parameters

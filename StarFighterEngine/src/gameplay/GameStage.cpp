@@ -3,31 +3,31 @@
 
 namespace st
 {
-    GamaStage::GamaStage(World* owningWorld)
+    GameStage::GameStage(World* owningWorld)
         : mWorld{ owningWorld },
         mStageFinished{false}
     {
     }
 
-    void GamaStage::StratStage()
+    void GameStage::StartStage()
     {
         LOG("Stage started");
     }
 
-    void GamaStage::TickStage(float deltaTime)
+    void GameStage::TickStage(float deltaTime)
     {
         LOG("Stage ticking");
 
     }
 
-    void GamaStage::FinishStage()
+    void GameStage::FinishStage()
     {
         OnStageFinishedDelegate.Broadcast();
         mStageFinished = true;
         StageFinished();
     }
 
-    void GamaStage::StageFinished()
+    void GameStage::StageFinished()
     {
         LOG("Stage finished");
     }

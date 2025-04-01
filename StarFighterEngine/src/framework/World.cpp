@@ -1,7 +1,8 @@
-#include "framework/World.h"
-#include "framework/Core.h"
 #include "framework/Actor.h"
 #include "framework/Application.h"
+#include "framework/Core.h"
+#include "framework/World.h"
+#include "gameplay/GameStage.h"
 
 namespace st
 {
@@ -9,7 +10,9 @@ namespace st
         : mOwningApp{ owningApp },
         mBeganPaly{ false },
         mActors{},
-        mPendingActors{}
+        mPendingActors{},
+        mCurrentStageIndex{ -1 },
+        mGameStages{}
     {
     }
 
@@ -24,22 +27,29 @@ namespace st
         if (!mBeganPaly) {
             mBeganPaly = true;
             BeginPlay();
+            InitGameStages();
+            NextGameStage();
         }
     }
 
     void World::TickInternal(float deltaTime)
     {
-        // put all pending actors in the world
+        // Put all pending actors in the world
         for (shared<Actor> actor : mPendingActors) {
             mActors.push_back(actor);
             actor->BeginPlayInternal();
         }
         mPendingActors.clear();
 
-        // tick all actors
+        // Tick all actors
         for (auto iter = mActors.begin(); iter != mActors.end();) {
             iter->get()->TickInternal(deltaTime);
             ++iter;
+        }
+
+        // Tick current stage
+        if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
+            mGameStages[mCurrentStageIndex]->TickStage(deltaTime);
         }
 
         Tick(deltaTime);
@@ -59,13 +69,30 @@ namespace st
 
     void World::CleanCycle()
     {
-        for (auto iter = mActors.begin(); iter != mActors.end();) {
+        // Claen Actros pending for destroy
+        for (auto iter = mActors.begin(); iter != mActors.end();) 
+        {
             if (iter->get()->IsPendingDestroy()) {
                 iter = mActors.erase(iter);
             } else {
                 ++iter;
             }
         }
+
+        // Clean finished Game Stages
+        for (auto iter = mGameStages.begin(); iter != mGameStages.end(); )
+        {
+            if (iter->get()->IsStageFinished()) {
+                iter = mGameStages.erase(iter);
+            } else {
+                ++iter;
+            }
+        }
+    }
+
+    void World::AddStage(const shared<GameStage>& newStage)
+    {
+        mGameStages.push_back(newStage);
     }
 
     void World::BeginPlay()
@@ -76,5 +103,26 @@ namespace st
     void World::Tick(float deltaTime)
     {
         //LOG("World tick at frame rate %f", 1.f / deltaTime);
+    }
+
+    void World::InitGameStages()
+    {
+    }
+
+    void World::AllGameStageFinished()
+    {
+    }
+
+    void World::NextGameStage()
+    {
+        ++mCurrentStageIndex;
+        if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
+            // Automatically moving on to the next stage when the previous stage is finished.
+            mGameStages[mCurrentStageIndex]->OnStageFinishedDelegate.BindAction(GetWeakRef(), &World::NextGameStage);
+            
+            mGameStages[mCurrentStageIndex]->StartStage();
+        } else {
+            AllGameStageFinished();
+        }
     }
 }

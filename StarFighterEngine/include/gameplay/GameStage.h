@@ -6,16 +6,16 @@ namespace st
 {
     class World;
 
-    class GamaStage : public Object
+    class GameStage : public Object
     {
     public:
-        GamaStage(World* owningWorld);
+        GameStage(World* owningWorld);
         const World* GetWorld() const { return mWorld; }
         World* GetWorld() { return mWorld; }
 
         Delegate<> OnStageFinishedDelegate;
 
-        virtual void StratStage();
+        virtual void StartStage();
         virtual void TickStage(float deltaTime);
         void FinishStage();
         bool IsStageFinished() const { return mStageFinished; }
@@ -24,6 +24,6 @@ namespace st
         virtual void StageFinished();
 
         World* mWorld;
-        bool mStageFinished
+        bool mStageFinished;
     };
 }

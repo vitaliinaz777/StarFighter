@@ -1,10 +1,13 @@
+#include "enemy/Vanguard.h"
+#include "gameplay/GameStage.h"
 #include "level/GameLevelOne.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
-#include "player/PlayerSpaceship.h"
-#include "enemy/Vanguard.h"
 #include "framework/TimerManager.h"
 #include "framework/World.h"
+#include "player/PlayerSpaceship.h"
+
+
 
 namespace st
 {
@@ -31,6 +34,11 @@ namespace st
     void GameLevelOne::BeginPlay()
     {
         mTimerIndexHandle_Test = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallback_Test, 2, true );
+    }
+
+    void GameLevelOne::InitGameStages()
+    {
+        AddStage(shared<GameStage>{new GameStage{this}});
     }
 
     void GameLevelOne::TimerCallback_Test()
