@@ -33,7 +33,7 @@ namespace st
     PhysicsSystem& PhysicsSystem::Get()
     {
         if (!physicsSystem) {
-            physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
+            physicsSystem = unique<PhysicsSystem>{new PhysicsSystem};
         }
 
         return *physicsSystem;
@@ -87,7 +87,7 @@ namespace st
     // Useful when we have a new world or a new map loaded.
     void PhysicsSystem::Cleanup() 
     {
-        physicsSystem = std::move(unique<PhysicsSystem>{new PhysicsSystem});
+        physicsSystem = unique<PhysicsSystem>{new PhysicsSystem};
     }
 
     void PhysicsSystem::ProcessPendingRemoveListeners()

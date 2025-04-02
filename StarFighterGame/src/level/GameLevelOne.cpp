@@ -25,10 +25,10 @@ namespace st
         testVanguard.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
         testVanguard.lock()->SetTeamID(2);
 
-        weak<Spaceship> testSpaceship = SpawnActor<Spaceship>();
-        testSpaceship.lock()->SetActorLocation(sf::Vector2f(400.f, 50.f));
-        testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
-        testSpaceship.lock()->SetTeamID(2);
+        //weak<Spaceship> testSpaceship = SpawnActor<Spaceship>();
+        //testSpaceship.lock()->SetActorLocation(sf::Vector2f(400.f, 50.f));
+        //testSpaceship.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
+        //testSpaceship.lock()->SetTeamID(2);
     }
 
     void GameLevelOne::BeginPlay()

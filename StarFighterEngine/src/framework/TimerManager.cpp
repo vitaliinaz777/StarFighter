@@ -67,7 +67,7 @@ namespace st
     TimerManager& TimerManager::Get()
     {
         if (!timerManager) {
-            timerManager = std::move(unique<TimerManager>(new TimerManager{}));
+            timerManager = unique<TimerManager>(new TimerManager{});
         }
 
         return *timerManager;

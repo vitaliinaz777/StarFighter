@@ -18,6 +18,8 @@ namespace st {
         mIsPendingDestroy = true;
     }
     
+    // Instance implementing 'Object' should be stored as shared pointer,
+    // in the frirst palce, to be able to get a weak reference from there.
     weak<Object> Object::GetWeakRef()
     {
         return shared_from_this();

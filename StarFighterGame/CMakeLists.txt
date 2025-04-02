@@ -5,6 +5,9 @@ add_executable(${STAR_FIGHTER_GAME_TARGET_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/include/enemy/Vanguard.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/enemy/Vanguard.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/enemy/VanguardStage.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/enemy/VanguardStage.cpp
+
 	${CMAKE_CURRENT_SOURCE_DIR}/include/gameFramework/GameApplication.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/gameFramework/GameApplication.cpp
 

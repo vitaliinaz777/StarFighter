@@ -1,6 +1,6 @@
 #pragma once
-#include "framework/Object.h"
 #include "framework/Delegate.h"
+#include "framework/Object.h"
 
 namespace st
 {
