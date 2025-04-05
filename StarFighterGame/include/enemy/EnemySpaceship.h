@@ -7,6 +7,7 @@ namespace st
     {
     public:
         EnemySpaceship(World* owningWorld, const std::string& texturePath, float collisionDamage = 200.f);
+        virtual ~EnemySpaceship();
         virtual void Tick(float deltaTime) override;
 
     private:

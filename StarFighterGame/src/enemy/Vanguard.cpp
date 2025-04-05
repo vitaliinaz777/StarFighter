@@ -11,6 +11,11 @@ namespace st
         SetActorRotation(90.f);
     }
 
+    Vanguard::~Vanguard()
+    {
+        LOG("Vanguard destroyed X");
+    }
+
     void Vanguard::Tick(float deltaTime)
     {
         EnemySpaceship::Tick(deltaTime);

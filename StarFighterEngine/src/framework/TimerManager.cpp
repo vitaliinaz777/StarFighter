@@ -64,6 +64,7 @@ namespace st
     {
     }
 
+    // If not exist, create and return singlton object of 'TimerManager' class
     TimerManager& TimerManager::Get()
     {
         if (!timerManager) {

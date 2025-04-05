@@ -24,8 +24,8 @@ namespace st
         sf::Vector2f mRightSpawnLoc;
         sf::Vector2f mSpawnLoc;
 
-        TimerIndexHandle mSpawnTimerHandle;
-        TimerIndexHandle mSwitchTimerHandle;
+        TimerIndexHandle mSpawnTimerIndexHandle;
+        TimerIndexHandle mSwitchTimerIndexHandle;
 
         int mRowsToSpawn;
         int mRowSpawnCount;

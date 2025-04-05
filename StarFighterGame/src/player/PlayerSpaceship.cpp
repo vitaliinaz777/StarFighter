@@ -14,7 +14,11 @@ namespace st
         SetTeamID(1);
     }
 
-    PlayerSpaceship::~PlayerSpaceship() {}; // TODO: added destructor to resolve pimpl problem with nique<BulletShooter> mShooter
+    // TODO: added destructor to resolve pimpl problem with nique<BulletShooter> mShooter
+    PlayerSpaceship::~PlayerSpaceship()
+    {
+        LOG("PlayerSpaceship destroyed :`(");
+    };
 
     void PlayerSpaceship::Tick(float deltaTime)
     {

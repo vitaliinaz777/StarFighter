@@ -14,6 +14,10 @@ namespace st
     {
     }
 
+    Spaceship::~Spaceship()
+    {
+    }
+
     void Spaceship::Tick(float deltaTime)
     {
         Actor::Tick(deltaTime);

@@ -19,7 +19,7 @@ namespace st
     };
 
 
-    // used as third argument(hash function) in Dictionary
+    // "Hasher" used as third argument(hash function) in Dictionary
     struct TimerIndexHandleHashFunction
     {
     public:
@@ -28,7 +28,6 @@ namespace st
             return timerIndexHandle.GetTimerKey();
         }
     };
-
 
     // Also used in Dictionary for comparing two 'TimerIndexHandle'
     bool operator==(const TimerIndexHandle& lhs, const TimerIndexHandle& rhs);
@@ -51,11 +50,11 @@ namespace st
         bool mIsExpired;
     };
 
-    // Singelton class manages structs 'Timer'
+    // Singelton class manages different structs 'Timer'
     class TimerManager
     {
     public:
-        static TimerManager& Get();
+        static TimerManager& Get(); // if not exist, create and return singlton object of 'TimerManager' class
 
         template <typename ClassName>
         TimerIndexHandle SetTimer(weak<Object> weakRef, void(ClassName::*callback)(), float duration, bool repeat = false)

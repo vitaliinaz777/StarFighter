@@ -9,6 +9,10 @@ namespace st
         SetTeamID(2);
     }
 
+    EnemySpaceship::~EnemySpaceship()
+    {
+    }
+
     void EnemySpaceship::Tick(float deltaTime)
     {
         Spaceship::Tick(deltaTime);

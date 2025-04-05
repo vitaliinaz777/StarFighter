@@ -1,4 +1,5 @@
 #include "enemy/Vanguard.h"
+#include "enemy/VanguardStage.h"
 #include "gameplay/GameStage.h"
 #include "level/GameLevelOne.h"
 #include "framework/Actor.h"
@@ -21,9 +22,9 @@ namespace st
         testPalyerSpaceship.lock()->SetActorRotation(-90.f);
         //testPalyerSpaceship.lock()->SetVelocity(sf::Vector2f(0.f, -200.f));
 
-        weak<Vanguard> testVanguard = SpawnActor<Vanguard>();
-        testVanguard.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
-        testVanguard.lock()->SetTeamID(2);
+        //weak<Vanguard> testVanguard = SpawnActor<Vanguard>();
+        //testVanguard.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
+        //testVanguard.lock()->SetTeamID(2);
 
         //weak<Spaceship> testSpaceship = SpawnActor<Spaceship>();
         //testSpaceship.lock()->SetActorLocation(sf::Vector2f(400.f, 50.f));
@@ -33,17 +34,10 @@ namespace st
 
     void GameLevelOne::BeginPlay()
     {
-        mTimerIndexHandle_Test = TimerManager::Get().SetTimer(GetWeakRef(), &GameLevelOne::TimerCallback_Test, 2, true );
     }
 
     void GameLevelOne::InitGameStages()
     {
-        AddStage(shared<GameStage>{new GameStage{this}});
-    }
-
-    void GameLevelOne::TimerCallback_Test()
-    {
-        LOG("TimerManager: callback function __ GameLevelOne::TimerCallback_Test() __ is called");
-        TimerManager::Get().ClearTimer(mTimerIndexHandle_Test);
+        AddStage(shared<VanguardStage>{new VanguardStage{this}});
     }
 }
