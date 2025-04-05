@@ -7,7 +7,7 @@ namespace st
 VanguardStage::VanguardStage(World *owningWorld)
     : GameStage(owningWorld),
     mSpawnInterval{1.5f},
-    mSwitchInterval{5.f},
+    mSwitchInterval{4.f},
     mSpawnDistanceToEdge{100.f},
     mLeftSpawnLoc{0.0f, 0.0f},
     mRightSpawnLoc{0.0f, 0.0f},
