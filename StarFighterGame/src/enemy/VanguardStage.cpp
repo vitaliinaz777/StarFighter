@@ -41,7 +41,8 @@ void VanguardStage::SpawnVanguard()
     ++mCurrentRowVanguardCount;
     if (mCurrentRowVanguardCount == mVanguardsPerRow) {
         TimerManager::Get().ClearTimer(mSpawnTimerIndexHandle);
-        mSwitchTimerIndexHandle = TimerManager::Get().SetTimer(GetWeakRef(), &VanguardStage::SwitchRow, mSwitchInterval, false);
+        mSwitchTimerIndexHandle = TimerManager::Get().SetTimer(GetWeakRef(), &VanguardStage::SwitchRow,
+                                                               mSwitchInterval, false);
         mCurrentRowVanguardCount = 0;
     }
 }
@@ -62,8 +63,8 @@ void VanguardStage::SwitchRow()
     }
 
     // Start a timer that periodically call SpawnVanguard()
-    mSpawnTimerIndexHandle = TimerManager::Get().SetTimer(GetWeakRef(), &VanguardStage::SpawnVanguard, mSpawnInterval, true);
-
+    mSpawnTimerIndexHandle = TimerManager::Get().SetTimer(GetWeakRef(), &VanguardStage::SpawnVanguard,
+                                                          mSpawnInterval, true);
     ++mRowSpawnCount;
 }
 } // namespace st

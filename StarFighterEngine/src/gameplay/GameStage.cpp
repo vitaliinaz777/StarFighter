@@ -21,9 +21,9 @@ namespace st
 
     void GameStage::FinishStage()
     {
-        OnStageFinishedDelegate.Broadcast();
         mStageFinished = true;
         StageFinished();
+        OnStageFinishedDelegate.Broadcast();
     }
 
     void GameStage::StageFinished()
