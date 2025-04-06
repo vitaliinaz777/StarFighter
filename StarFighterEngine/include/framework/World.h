@@ -45,14 +45,14 @@ namespace st
         virtual void InitGameStages();
         virtual void AllGameStageFinished();
         void NextGameStage();
-        
-        int mCurrentStageIndex;
+        void StartStages();
 
         // 'GameStage' which is implementing 'Object' should be stored as shared pointer in List,
         // to be able to get a weak reference through function in 'Object' class:
         // weak<Object> Object::GetWeakRef()
         List<shared<GameStage>> mGameStages;
-        
+        List<shared<GameStage>>::iterator mCurrentStageIter;
+
     };
 
     // variadic tamplate parameters

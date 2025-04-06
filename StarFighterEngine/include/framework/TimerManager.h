@@ -63,7 +63,11 @@ namespace st
 
             mTimers.insert({ timerIndexHandle,
                            Timer( weakRef,
-                                [=] {(static_cast<ClassName*>(weakRef.lock().get())->*callback)(); }, // this lambda passes in pair 'mListener' to 'std::function<void()> callback' inside struct 'Timer' 
+                                 // this lambda passes in pair 'mListener' to 'std::function<void()> callback' inside struct 'Timer'
+                                 // (static_cast<ClassName*>(weakRef.lock().get()) is ClassName
+                                 // *callback is callback function
+                                 // VanguardStage::SpawnVanguard()
+                                [=] {(static_cast<ClassName*>(weakRef.lock().get())->*callback)(); }, 
                                 duration,
                                 repeat )
                            });

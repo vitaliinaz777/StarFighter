@@ -3,6 +3,7 @@
 #include "enemy/Vanguard.h"
 #include "enemy/VanguardStage.h"
 #include "gameplay/GameStage.h"
+#include "gameplay/WaitStage.h"
 #include "level/GameLevelOne.h"
 #include "framework/Actor.h"
 #include "framework/AssetManager.h"
@@ -40,7 +41,9 @@ namespace st
 
     void GameLevelOne::InitGameStages()
     {
-        AddStage(shared<VanguardStage>{new VanguardStage{this}});
+        AddStage(shared<WaitStage>{new WaitStage{ this, 5.f }}); // wait for 'X' seconds between game stages
+        AddStage(shared<VanguardStage>{new VanguardStage{ this }});
+        AddStage(shared<WaitStage>{new WaitStage{this, 15.f}}); // wait for 'X' seconds between game stages
         AddStage(shared<TwinBladeStage>{new TwinBladeStage{this}});
     }
 }

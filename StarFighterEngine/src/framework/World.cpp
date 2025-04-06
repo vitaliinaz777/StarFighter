@@ -11,8 +11,8 @@ namespace st
         mBeganPaly{ false },
         mActors{},
         mPendingActors{},
-        mCurrentStageIndex{ -1 },
-        mGameStages{}
+        mGameStages{},
+        mCurrentStageIter{ mGameStages.end()}
     {
     }
 
@@ -28,7 +28,7 @@ namespace st
             mBeganPaly = true;
             BeginPlay();
             InitGameStages();
-            NextGameStage();
+            StartStages();
         }
     }
 
@@ -48,8 +48,8 @@ namespace st
         }
 
         // Tick current stage
-        if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-            mGameStages[mCurrentStageIndex]->TickStage(deltaTime);
+        if (mCurrentStageIter != mGameStages.end()) {
+            mCurrentStageIter->get()->TickStage(deltaTime);
         }
 
         Tick(deltaTime);
@@ -78,16 +78,6 @@ namespace st
                 ++iter;
             }
         }
-
-        // Clean finished Game Stages
-        for (auto iter = mGameStages.begin(); iter != mGameStages.end(); )
-        {
-            if (iter->get()->IsStageFinished()) {
-                iter = mGameStages.erase(iter);
-            } else {
-                ++iter;
-            }
-        }
     }
 
     void World::AddStage(const shared<GameStage>& newStage)
@@ -111,18 +101,24 @@ namespace st
 
     void World::AllGameStageFinished()
     {
+        LOG("All Stages Finished");
     }
 
     void World::NextGameStage()
     {
-        ++mCurrentStageIndex;
-        if (mCurrentStageIndex >= 0 && mCurrentStageIndex < mGameStages.size()) {
-            // Automatically moving on to the next stage when the previous stage is finished.
-            mGameStages[mCurrentStageIndex]->OnStageFinishedDelegate.BindAction(GetWeakRef(), &World::NextGameStage);
-            
-            mGameStages[mCurrentStageIndex]->StartStage();
+        mCurrentStageIter = mGameStages.erase(mCurrentStageIter);
+        if(mCurrentStageIter != mGameStages.end()){
+            mCurrentStageIter->get()->StartStage();
+            mCurrentStageIter->get()->OnStageFinishedDelegate.BindAction(GetWeakRef(), &World::NextGameStage);
         } else {
             AllGameStageFinished();
         }
+    }
+
+    void World::StartStages()
+    {
+        mCurrentStageIter = mGameStages.begin();
+        mCurrentStageIter->get()->StartStage();
+        mCurrentStageIter->get()->OnStageFinishedDelegate.BindAction(GetWeakRef(), &World::NextGameStage);
     }
 }
